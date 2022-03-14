@@ -394,7 +394,7 @@ public interface Coll {
     }
 
     static <K, V> Map<K, V> map(@NonNull final List<K> keys, @NonNull final List<V> values) {
-        if (Lang.equals(keys.size(), values.size())) {
+        if (Lang.eq(keys.size(), values.size())) {
             throw new IllegalArgumentException(Lang.format("Func map error : keys size :{},values size:{}; please check ", keys.size(), values.size()));
         }
         final Map<K, V> map = new HashMap<>();

@@ -69,7 +69,7 @@ public interface Lang {
      * @return 是否相等
      * @since 0.01
      */
-    static boolean equals(double num1, double num2) {
+    static boolean eq(double num1, double num2) {
         return Double.doubleToLongBits(num1) == Double.doubleToLongBits(num2);
     }
 
@@ -83,7 +83,7 @@ public interface Lang {
      * @return 是否相等
      * @since 0.01
      */
-    static boolean equals(float num1, float num2) {
+    static boolean eq(float num1, float num2) {
         return Float.floatToIntBits(num1) == Float.floatToIntBits(num2);
     }
 
@@ -96,7 +96,7 @@ public interface Lang {
      * @return 是否相等
      * @since 0.01
      */
-    static boolean equals(long num1, long num2) {
+    static boolean eq(long num1, long num2) {
         return num1 == num2;
     }
 
@@ -110,7 +110,7 @@ public interface Lang {
      * @return 是否相等
      * @since 0.01
      */
-    static boolean equals(BigDecimal bigNum1, BigDecimal bigNum2) {
+    static boolean eq(BigDecimal bigNum1, BigDecimal bigNum2) {
         //noinspection NumberEquality
         if (bigNum1 == bigNum2) {
             // 如果用户传入同一对象，省略compareTo以提高性能。
@@ -131,7 +131,7 @@ public interface Lang {
      * @return 是否相同
      * @since 0.01
      */
-    static boolean equals(char c1, char c2, boolean caseInsensitive) {
+    static boolean eq(char c1, char c2, boolean caseInsensitive) {
         if (caseInsensitive) {
             return Character.toLowerCase(c1) == Character.toLowerCase(c2);
         }
