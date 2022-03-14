@@ -85,13 +85,13 @@
 
     <scm>
         <tag>master</tag>
-        <url>https://github.com/fzdwx/words-match</url>
+        <url>https://github.com/fzdwx/lambda</url>
         <connection>scm:git:https://github.com/fzdwx/lambda.git</connection>
         <developerConnection>scm:git:https://github.com/fzdwx/lambdah.git</developerConnection>
     </scm>
 
     <description>A λ function tool.</description>
-    <url>https://github.com/fzdwx/lambdah</url>
+    <url>https://github.com/fzdwx/lambda</url>
     <name>λ</name>
 
     <build>
