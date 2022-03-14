@@ -1,6 +1,7 @@
 package io.github.fzdwx.lambada;
 
 import cn.hutool.core.text.StrFormatter;
+import cn.hutool.core.text.StrPool;
 import io.github.fzdwx.lambada.internal.LangUtil;
 import org.apache.commons.lang3.StringUtils;
 
