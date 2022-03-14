@@ -6,6 +6,7 @@ import io.github.fzdwx.lambada.internal.Tuple2;
 /**
  * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
  * @date 2022/3/12 9:12
+ * @since 0.01
  */
 public interface Tuple {
 

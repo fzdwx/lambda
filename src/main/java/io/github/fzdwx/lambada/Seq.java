@@ -20,6 +20,7 @@ import java.util.stream.Stream;
 /**
  * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/2/23 20:39
+ * @since 0.01
  */
 public interface Seq<T> extends Stream<T> {
 
@@ -101,7 +102,7 @@ public interface Seq<T> extends Stream<T> {
      * @return {@link Seq<U> }
      */
     default <U> Seq<U> typeOf(final Class<? extends U> clazz) {
-        return (Seq<U>) this.map(clazz::cast);
+        return this.map(clazz::cast);
     }
 
     /**
@@ -150,10 +151,40 @@ public interface Seq<T> extends Stream<T> {
     Seq<T> filter(final Predicate<? super T> predicate);
 
     @Override
+    <R> Seq<R> map(final Function<? super T, ? extends R> mapper);
+
+    @Override
+    <R> Seq<R> flatMap(final Function<? super T, ? extends Stream<? extends R>> mapper);
+
+    @Override
+    Seq<T> distinct();
+
+    @Override
+    Seq<T> sorted();
+
+    @Override
     Seq<T> sorted(Comparator<? super T> comparator);
 
     @Override
     Seq<T> peek(Consumer<? super T> action);
+
+    @Override
+    Seq<T> limit(final long maxSize);
+
+    @Override
+    Seq<T> skip(final long n);
+
+    @Override
+    Seq<T> sequential();
+
+    @Override
+    Seq<T> parallel();
+
+    @Override
+    Seq<T> unordered();
+
+    @Override
+    Seq<T> onClose(final Runnable closeHandler);
 
     Seq<T> concat(Stream<? extends T> other);
 

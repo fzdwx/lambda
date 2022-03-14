@@ -26,6 +26,7 @@ import java.util.stream.Stream;
  *
  * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
  * @date 2022/2/25 13:10
+ * @since 0.01
  */
 public interface Coll {
 
