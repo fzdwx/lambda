@@ -105,10 +105,9 @@
     </developers>
 
     <scm>
-        <tag>master</tag>
         <url>https://github.com/fzdwx/lambda</url>
         <connection>scm:git:https://github.com/fzdwx/lambda.git</connection>
-        <developerConnection>scm:git:https://github.com/fzdwx/lambdah.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/fzdwx/lambda.git</developerConnection>
     </scm>
 
     <description>A λ function tool.</description>
