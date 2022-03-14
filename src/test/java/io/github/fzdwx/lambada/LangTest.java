@@ -21,7 +21,6 @@ class LangTest {
         final Person p2 = new Person();
         p2.name = "like";
 
-
         assertEquals(p1, Lang.defVal(p1, p2));
         assertEquals(p2, Lang.defVal(null, p2));
     }
@@ -37,5 +36,11 @@ class LangTest {
         assertEquals(Lang.join(",", "a", "b", "c"), "a,b,c");
         assertEquals(Lang.join(Coll.list("a", "b", "c")), "a,b,c");
         assertEquals(Lang.join(Coll.list("a", "b", "c"), ","), "a,b,c");
+    }
+
+    @Test
+    void test_seq() {
+        final Seq<Integer> seq = Seq.of(1).concat(2).concat(3);
+        seq.println();
     }
 }

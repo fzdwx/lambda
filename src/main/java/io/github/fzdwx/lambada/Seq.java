@@ -13,11 +13,15 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
+ * seq.
+ *
  * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/2/23 20:39
  * @since 0.01
@@ -43,6 +47,14 @@ public interface Seq<T> extends Stream<T> {
 
     static <T> Seq<T> empty() {
         return new SeqImpl<>(Stream.empty());
+    }
+
+    static <T> Seq<T> generate(Supplier<T> supplier) {
+        return new SeqImpl<>(Stream.generate(supplier));
+    }
+
+    static <T> Seq<T> iterate(final T seed, final UnaryOperator<T> f) {
+        return new SeqImpl<>(Stream.iterate(seed, f));
     }
 
     /**
@@ -187,6 +199,10 @@ public interface Seq<T> extends Stream<T> {
     Seq<T> onClose(final Runnable closeHandler);
 
     Seq<T> concat(Stream<? extends T> other);
+
+    Seq<T> concat(T other);
+
+    Seq<T> concat(T... other);
 
     Set<T> toSet();
 

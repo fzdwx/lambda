@@ -257,6 +257,19 @@ public class SeqImpl<T> implements Seq<T> {
     }
 
     @Override
+    public Seq<T> concat(final T other) {
+        this.stream = Stream.concat(this.stream, Stream.of(other));
+        return this;
+    }
+
+    @SafeVarargs
+    @Override
+    public final Seq<T> concat(final T... other) {
+        this.stream = Stream.concat(this.stream, Stream.of(other));
+        return this;
+    }
+
+    @Override
     public Set<T> toSet() {
         return this.stream.collect(Collectors.toSet());
     }
