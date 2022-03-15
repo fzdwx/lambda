@@ -1,12 +1,13 @@
 package io.github.fzdwx.lambada.internal;
 
 import io.github.fzdwx.lambada.Tuple;
+import lombok.ToString;
 
 /**
- *
  * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
  * @date 2022/3/12 9:12
  */
+@ToString
 public class Tuple2<V1, V2> implements Tuple {
 
     public final V1 v1;

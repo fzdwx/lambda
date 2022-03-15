@@ -7,6 +7,7 @@ import io.github.fzdwx.lambada.internal.Tuple2;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -186,6 +187,8 @@ public interface Seq<T> extends Stream<T> {
     @Override
     Seq<T> skip(final long n);
 
+    List<T> toList();
+
     @Override
     Seq<T> sequential();
 
@@ -205,8 +208,6 @@ public interface Seq<T> extends Stream<T> {
     Seq<T> concat(T... other);
 
     Set<T> toSet();
-
-    List<T> toList();
 
     default void println() {
         this.forEach(System.out::println);
