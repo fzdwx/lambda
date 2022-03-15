@@ -1,7 +1,11 @@
 package io.github.fzdwx.lambada;
 
+import cn.hutool.core.lang.tree.Tree;
+import cn.hutool.core.lang.tree.TreeUtil;
 import lombok.Data;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -47,7 +51,7 @@ class LangTest {
 
     @Test
     void test_qwe() {
-        final Seq<Tag> of = Seq.of(
+        final List<Tag> list = Coll.list(
                 Tag.of(1, 0, "a"),
                 Tag.of(2, 0, "b"),
                 Tag.of(3, 0, "c"),
@@ -59,8 +63,16 @@ class LangTest {
                 Tag.of(9, 3, "y"),
                 Tag.of(10, 1, "l"),
                 Tag.of(11, 2, "p"),
-                Tag.of(12, 3, "m")
+                Tag.of(12, 3, "m"),
+                Tag.of(13, 3, "O"),
+                Tag.of(14, 3, "OU")
         );
+        final List<Tree<Integer>> build = TreeUtil.build(list, 0, (object, treeNode) -> {
+            treeNode.setId(object.getId());
+            treeNode.setName(object.getName());
+            treeNode.setParentId(object.getPid());
+        });
+        System.out.println(build);
     }
 
     @Data
