@@ -15,6 +15,8 @@ import java.util.Date;
 public class UnixTime {
 
     private final long value;
+    private final static long t = 2208988800L;
+    private final static long v = 1000L;
 
     /**
      * create now for unix time.
@@ -33,6 +35,16 @@ public class UnixTime {
      */
     public static UnixTime of(long value) {
         return new UnixTime(value);
+        // return new UnixTime((value / v) + t);
+    }
+
+    /**
+     * unix time to long
+     *
+     * @return long
+     */
+    public static long unixTime() {
+        return (calValue() - t) * v;
     }
 
     /**
@@ -50,7 +62,7 @@ public class UnixTime {
      * @return {@link Date }
      */
     public Date toDate() {
-        return new Date((value - 2208988800L) * 1000L);
+        return new Date(unixTime(value));
     }
 
     /**
@@ -59,12 +71,12 @@ public class UnixTime {
      * @return {@link LocalDateTime }
      */
     public LocalDateTime toLocalDateTime() {
-        return LocalDateTimeUtil.of(value);
+        return LocalDateTimeUtil.of(unixTime(value));
     }
 
     @Override
     public String toString() {
-        return new Date((value - 2208988800L) * 1000L).toString();
+        return new Date(unixTime(value)).toString();
     }
 
     private UnixTime(long value) {
@@ -72,6 +84,14 @@ public class UnixTime {
     }
 
     private UnixTime() {
-        this(System.currentTimeMillis() / 1000L + 2208988800L);
+        this(calValue());
+    }
+
+    private static long calValue() {
+        return System.currentTimeMillis() / v + t;
+    }
+
+    private static long unixTime(long value) {
+        return (value - t) * v;
     }
 }
