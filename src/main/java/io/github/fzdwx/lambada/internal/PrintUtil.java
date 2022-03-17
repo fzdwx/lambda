@@ -57,43 +57,42 @@ public class PrintUtil {
         System.out.print(ANSI_RESET);
     }
 
-
     public static void debug(Object content) {
-        System.out.print("[Solon] ");
+        System.out.print("[fzdwx] ");
         blueln(content);
     }
 
     public static void debug(String label, Object content) {
-        System.out.print("[Solon] ");
+        System.out.print("[fzdwx] ");
         blueln(label + ": " + content);
     }
 
     public static void info(Object content) {
-        System.out.println("[Solon] " + content);
+        System.out.println("[fzdwx] " + content);
     }
 
     public static void info(String label, Object content) {
-        System.out.print("[Solon] ");
+        System.out.print("[fzdwx] ");
         greenln(label + ": " + content);
     }
 
     public static void warn(Object content) {
-        System.out.print("[Solon] ");
+        System.out.print("[fzdwx] ");
         yellowln(content);
     }
 
     public static void warn(String label, Object content) {
-        System.out.print("[Solon] ");
+        System.out.print("[fzdwx] ");
         yellowln(label + ": " + content);
     }
 
     public static void error(Object content) {
-        System.out.print("[Solon] ");
+        System.out.print("[fzdwx] ");
         redln(content);
     }
 
     public static void error(String label, Object content) {
-        System.out.print("[Solon] ");
+        System.out.print("[fzdwx] ");
         redln(label + ": " + content);
     }
 }
