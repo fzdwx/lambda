@@ -7,6 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 import java.math.BigDecimal;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -322,4 +324,20 @@ public interface Lang {
     static <T> String join(final Iterable<T> iterable) {
         return StringUtils.join(iterable, StrPool.COMMA);
     }
+
+    /**
+     * 检查字符串是否为空
+     *
+     * @param s string
+     */
+    static boolean isEmpty(String s) {
+        return s == null || s.length() == 0;
+    }
+
+    /**
+     * default charset
+     *
+     * @since 0.06
+     */
+    static Charset CHARSET = StandardCharsets.UTF_8;
 }
