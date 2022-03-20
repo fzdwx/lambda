@@ -1,5 +1,7 @@
 package io.github.fzdwx.lambada.fun;
 
+import java.io.IOException;
+
 /**
  * hooks.
  *
