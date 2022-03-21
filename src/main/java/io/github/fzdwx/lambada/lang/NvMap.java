@@ -16,6 +16,10 @@ import java.util.Map;
  */
 public class NvMap extends LinkedCaseInsensitiveMap<String> {
 
+    public static NvMap create() {
+        return new NvMap();
+    }
+
     public NvMap() {
         super();
     }
@@ -57,6 +61,13 @@ public class NvMap extends LinkedCaseInsensitiveMap<String> {
         }
 
         return d;
+    }
+
+    public NvMap add(final String key, final Iterable<String> value) {
+        for (final String s : value) {
+            this.put(key, s);
+        }
+        return this;
     }
 
     public int getInt(String key) {
