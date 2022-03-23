@@ -1,11 +1,13 @@
 package io.github.fzdwx.lambada;
 
 
+import cn.hutool.core.collection.CollUtil;
 import com.google.common.collect.Sets;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -565,5 +567,9 @@ public interface Coll {
         map.put(k5, v5);
         map.put(k6, v6);
         return map;
+    }
+
+    static Collection<Integer> disjunction(List<Integer> l1, List<Integer> l2) {
+        return CollUtil.disjunction(l1, l2);
     }
 }
