@@ -15,7 +15,6 @@ import java.util.Date;
 public class UnixTime {
 
     private final long value;
-    private final static long t = 2208988800L;
     private final static long v = 1000L;
 
     /**
@@ -44,7 +43,7 @@ public class UnixTime {
      * @return long
      */
     public static long unixTime() {
-        return (calValue() - t) * v;
+        return calValue() * v;
     }
 
     /**
@@ -88,10 +87,10 @@ public class UnixTime {
     }
 
     private static long calValue() {
-        return System.currentTimeMillis() / v + t;
+        return System.currentTimeMillis() / v;
     }
 
     private static long unixTime(long value) {
-        return (value - t) * v;
+        return value * v;
     }
 }
