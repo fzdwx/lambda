@@ -31,16 +31,29 @@ public interface State<Value> {
     /**
      * reset to failure state.
      */
-    <NewValue> State<NewValue> setFail(Throwable cause);
+    State<Value> setFail(Throwable cause);
+
+    default <NewValue> State<NewValue> newFail() {
+        return State.failure(this.cause());
+    }
+
+    default <NewValue> State<NewValue> newFail(Throwable cause) {
+        return State.failure(cause);
+    }
+
+    default <NewValue> State<NewValue> newSuccess() {
+        return State.success(null);
+    }
+
+    default <NewValue> State<NewValue> newSuccess(NewValue newValue) {
+        return State.success(newValue);
+    }
 
     /**
      * reset to success.
      */
-    <NewValue> State<NewValue> setSuccess(NewValue value);
+    State<Value> setSuccess(Value value);
 
-    default <NewValue> State<NewValue> setSuccess() {
-        return this.setSuccess(null);
-    }
 
     default void throwCause() throws Throwable {
         throw cause();
@@ -93,13 +106,19 @@ public interface State<Value> {
             return value;
         }
 
-        public <NewValue> State<NewValue> setFail(final Throwable cause) {
-            return State.failure(cause);
+        @Override
+        public State<Value> setFail(final Throwable cause) {
+            this.cause = cause;
+            this.succesed = false;
+            return this;
         }
 
         @Override
-        public <NewValue> State<NewValue> setSuccess(final NewValue value) {
-            return State.success(value);
+        public State<Value> setSuccess(final Value value) {
+            this.value = value;
+            this.succesed = true;
+            this.cause = null;
+            return this;
         }
     }
 }
