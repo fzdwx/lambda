@@ -33,18 +33,30 @@ public interface State<Value> {
      */
     State<Value> setFail(Throwable cause);
 
+    /**
+     * new fail and use old cause.
+     */
     default <NewValue> State<NewValue> newFail() {
         return State.failure(this.cause());
     }
 
+    /**
+     * new fail and use new cause.
+     */
     default <NewValue> State<NewValue> newFail(Throwable cause) {
         return State.failure(cause);
     }
 
+    /**
+     * new success and use old value.
+     */
     default <NewValue> State<NewValue> newSuccess() {
         return State.success(null);
     }
 
+    /**
+     * new success and use new value.
+     */
     default <NewValue> State<NewValue> newSuccess(NewValue newValue) {
         return State.success(newValue);
     }
@@ -54,9 +66,19 @@ public interface State<Value> {
      */
     State<Value> setSuccess(Value value);
 
-
+    /**
+     * throw cause.
+     *
+     * @apiNote no check isFailure.
+     */
     default void throwCause() throws Throwable {
-        throw cause();
+        final Throwable cause = cause();
+
+        if (cause == null) {
+            throw new IllegalStateException("cause is null");
+
+        }
+        throw cause;
     }
 
     static <Value> State<Value> success(final Value value) {
