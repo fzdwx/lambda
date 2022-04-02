@@ -1,6 +1,8 @@
 package io.github.fzdwx.lambada.fun;
 
 /**
+ * result.
+ *
  * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/3/20 16:17
  */
