@@ -30,6 +30,9 @@ public abstract class Exceptions {
         }
     }
 
+    public static void throwIllegalArgumentException(final String message) {
+        throw new IllegalArgumentException(message);
+    }
 
     static class LambdaException extends RuntimeException {
 
