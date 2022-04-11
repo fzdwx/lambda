@@ -28,6 +28,10 @@ public interface State<Value> {
      */
     Value get();
 
+    default void then(Hooks<State<Value>> h) {
+        h.call(this);
+    }
+
     /**
      * reset to failure state.
      */
