@@ -572,4 +572,25 @@ public interface Coll {
     static Collection<Integer> disjunction(List<Integer> l1, List<Integer> l2) {
         return CollUtil.disjunction(l1, l2);
     }
+
+    @NonNull
+    static <K, V> Map<K, V> concat(Map<K, V> m1, Map<K, V> m2) {
+        if (m1 == null && m2 == null) {
+            return map();
+        }
+        if (m1 == null) {
+            return m2;
+        }
+        if (m2 == null) {
+            return m1;
+        }
+
+        if (m1.size() > m2.size()) {
+            m1.putAll(m2);
+            return m1;
+        } else {
+            m2.putAll(m1);
+            return m2;
+        }
+    }
 }
