@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -212,6 +213,13 @@ public interface Lang {
     }
 
     /**
+     * 判断集合是否为空
+     */
+    static <T> boolean isEmpty(Collection<T> collection) {
+        return collection == null || collection.isEmpty();
+    }
+
+    /**
      * 检查给定的CharSequence既不是null也不是长度为 0。
      * 注意：对于纯粹由空格组成的CharSequence ，此方法返回true 。
      * <p>
@@ -339,5 +347,5 @@ public interface Lang {
      *
      * @since 0.06
      */
-    static Charset CHARSET = StandardCharsets.UTF_8;
+    Charset CHARSET = StandardCharsets.UTF_8;
 }
