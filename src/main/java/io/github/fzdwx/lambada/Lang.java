@@ -1,6 +1,6 @@
 package io.github.fzdwx.lambada;
 
-import cn.hutool.core.collection.IterUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.StrFormatter;
 import cn.hutool.core.text.StrPool;
 import io.github.fzdwx.lambada.internal.LangUtil;
@@ -355,11 +355,6 @@ public interface Lang {
         if (collection == null || collection.isEmpty()) {
             return null;
         }
-        if (collection instanceof List) {
-            final List<T> list = ((List<T>) collection);
-            return list.get(0);
-        } else {
-            return IterUtil.get(collection.iterator(), 0);
-        }
+        return CollUtil.getFirst(collection);
     }
 }
