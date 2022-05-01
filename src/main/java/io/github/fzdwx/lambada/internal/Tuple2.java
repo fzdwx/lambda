@@ -4,7 +4,7 @@ import io.github.fzdwx.lambada.Tuple;
 import lombok.ToString;
 
 /**
- * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
+ * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/3/12 9:12
  */
 @ToString

@@ -5,7 +5,7 @@ import io.github.fzdwx.lambada.internal.Tuple2;
 import io.github.fzdwx.lambada.internal.Tuple3;
 
 /**
- * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
+ * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/3/12 9:12
  * @since 0.01
  */

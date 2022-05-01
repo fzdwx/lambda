@@ -1,7 +1,7 @@
 package io.github.fzdwx.lambada.internal;
 
 /**
- * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
+ * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/3/14 14:19
  */
 public final class LangUtil {

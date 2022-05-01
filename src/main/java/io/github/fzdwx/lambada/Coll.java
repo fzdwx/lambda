@@ -26,7 +26,7 @@ import java.util.stream.Stream;
  * <p>
  * a Collection funciton set.
  *
- * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
+ * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/2/25 13:10
  * @since 0.01
  */

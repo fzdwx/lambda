@@ -7,7 +7,7 @@ import java.io.ByteArrayInputStream;
 /**
  * io util.
  *
- * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
+ * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/4/21 15:04
  */
 public interface Io {

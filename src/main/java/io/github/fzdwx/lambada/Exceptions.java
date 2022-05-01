@@ -1,7 +1,7 @@
 package io.github.fzdwx.lambada;
 
 /**
- * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
+ * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/3/23 12:03
  */
 public abstract class Exceptions {
