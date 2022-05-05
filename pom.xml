@@ -6,7 +6,7 @@
 
     <groupId>io.github.fzdwx</groupId>
     <artifactId>lambda</artifactId>
-    <version>0.09.4</version>
+    <version>0.09.5</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
