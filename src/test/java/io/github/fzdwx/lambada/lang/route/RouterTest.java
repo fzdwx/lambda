@@ -1,10 +1,9 @@
 package io.github.fzdwx.lambada.lang.route;
 
 import io.github.fzdwx.lambada.internal.Tuple2;
+import io.github.fzdwx.lambada.lang.NvMap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
 
 /**
  * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
@@ -27,10 +26,10 @@ class RouterTest {
 
         Assertions.assertEquals(router.match("GET", "/hhhh").v1, "6");
         Assertions.assertEquals(router.match("GET", "/").v1, "1");
-        final Tuple2<Object, Map<String, String>> hi = router.match("GET", "/hi/123");
+        final Tuple2<Object, NvMap> hi = router.match("GET", "/hi/123");
         Assertions.assertEquals(hi.v1, "4");
         Assertions.assertEquals(hi.v2.get("name"), "123");
-        final Tuple2<Object, Map<String, String>> assets = router.match("GET", "/assets/123filepath");
+        final Tuple2<Object, NvMap> assets = router.match("GET", "/assets/123filepath");
         Assertions.assertEquals(assets.v1, "5");
         Assertions.assertEquals(assets.v2.get("filepath"), "123filepath");
         Assertions.assertNull(router.match("GET", "/hhhh1").v1);

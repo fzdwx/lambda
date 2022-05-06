@@ -7,9 +7,11 @@ import io.github.fzdwx.lambada.Lang;
 import io.github.fzdwx.lambada.Tuple;
 import io.github.fzdwx.lambada.internal.Tuple2;
 import io.github.fzdwx.lambada.lang.HttpMethod;
+import io.github.fzdwx.lambada.lang.NvMap;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -65,9 +67,9 @@ public class RouterImpl<Handler> implements Router<Handler> {
      * @param path   路径
      * @return {@link Tuple2 }<{@link Handler }, {@link Map }<{@link String }, {@link String }>>
      */
-    public Tuple2<Handler, Map<String, String>> match(final HttpMethod method, final String path) {
+    public Tuple2<Handler, NvMap> match(final HttpMethod method, final String path) {
         final String[] searchParts = toParts(path);
-        final Map<String, String> params = Coll.map();
+        final NvMap params = NvMap.create();
         Handler handler = null;
 
         final Route route = routes.get(method).search(0, searchParts);
@@ -90,6 +92,11 @@ public class RouterImpl<Handler> implements Router<Handler> {
         }
 
         return Tuple.of(handler, params);
+    }
+
+    @Override
+    public Map<String, Handler> handlers() {
+        return this.handlers;
     }
 
     public static class Route {

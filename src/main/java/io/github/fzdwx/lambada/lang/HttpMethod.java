@@ -8,10 +8,12 @@ import java.util.Locale;
  */
 public enum HttpMethod {
 
-    GET, POST, PUT, DELETE, HEAD, OPTIONS, TRACE, CONNECT;
+    GET, POST, PUT, PATCH,DELETE, HEAD, OPTIONS, TRACE, CONNECT;
 
     /**
-     * @throws IllegalArgumentException 当参数不是一个合法的HTTP方法时抛出
+     * Returns the {@link HttpMethod} represented by the specified name.
+     * If the specified name is a standard HTTP method name, a cached instance
+     * will be returned.  Otherwise, a new instance will be returned.
      */
     public static HttpMethod of(String method) throws IllegalArgumentException {
         method = method.toUpperCase(Locale.ROOT);

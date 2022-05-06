@@ -2,17 +2,19 @@ package io.github.fzdwx.lambada.lang.route;
 
 import io.github.fzdwx.lambada.internal.Tuple2;
 import io.github.fzdwx.lambada.lang.HttpMethod;
+import io.github.fzdwx.lambada.lang.NvMap;
 
 import java.util.Map;
 
 /**
  * router implementation
+ *
  * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/5/6 10:54
  */
 public interface Router<Handler> {
 
-    public static <Handler> RouterImpl<Handler> router() {
+    static <Handler> RouterImpl<Handler> router() {
         return new RouterImpl<>();
     }
 
@@ -38,7 +40,7 @@ public interface Router<Handler> {
      * @param path   路径
      * @return router handler and params map
      */
-    Tuple2<Handler, Map<String, String>> match(final HttpMethod method, final String path);
+    Tuple2<Handler, NvMap> match(final HttpMethod method, final String path);
 
     /**
      * @see #addRoute(HttpMethod, String, Object)
@@ -89,9 +91,11 @@ public interface Router<Handler> {
     /**
      * @see #match(HttpMethod, String)
      */
-    default Tuple2<Handler, Map<String, String>> match(String method, String path) {
+    default Tuple2<Handler, NvMap> match(String method, String path) {
         final HttpMethod httpMethod = HttpMethod.of(method);
 
         return match(httpMethod, path);
     }
+
+    Map<String, Handler> handlers();
 }
