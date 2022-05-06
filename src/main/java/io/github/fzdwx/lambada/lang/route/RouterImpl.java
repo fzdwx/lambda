@@ -12,6 +12,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
@@ -213,5 +214,21 @@ public class RouterImpl<Handler> implements Router<Handler> {
             return Lang.eq(child.part, part) || child.wildFlag;
         }
 
+    }
+
+    private String[] toParts(String pattern) {
+        final String[] vs = pattern.split("/");
+
+        final List<String> parts = Coll.list();
+        for (String item : vs) {
+            if (!Objects.equals(item, "")) {
+                parts.add(item);
+                if (item.charAt(0) == '*') {
+                    break;
+                }
+            }
+        }
+
+        return parts.toArray(new String[0]);
     }
 }

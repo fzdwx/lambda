@@ -1,12 +1,9 @@
 package io.github.fzdwx.lambada.lang.route;
 
-import io.github.fzdwx.lambada.Coll;
 import io.github.fzdwx.lambada.internal.Tuple2;
 import io.github.fzdwx.lambada.lang.HttpMethod;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
@@ -95,21 +92,5 @@ public interface Router<Handler> {
         final HttpMethod httpMethod = HttpMethod.of(method);
 
         return match(httpMethod, path);
-    }
-
-    default String[] toParts(String pattern) {
-        final String[] vs = pattern.split("/");
-
-        final List<String> parts = Coll.list();
-        for (String item : vs) {
-            if (!Objects.equals(item, "")) {
-                parts.add(item);
-                if (item.charAt(0) == '*') {
-                    break;
-                }
-            }
-        }
-
-        return parts.toArray(new String[0]);
     }
 }
