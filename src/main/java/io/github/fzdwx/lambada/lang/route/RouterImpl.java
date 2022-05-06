@@ -1,4 +1,4 @@
-package io.github.fzdwx.lambada.lang;
+package io.github.fzdwx.lambada.lang.route;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
@@ -6,52 +6,42 @@ import io.github.fzdwx.lambada.Coll;
 import io.github.fzdwx.lambada.Lang;
 import io.github.fzdwx.lambada.Tuple;
 import io.github.fzdwx.lambada.internal.Tuple2;
+import io.github.fzdwx.lambada.lang.HttpMethod;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
  * @date 2022/5/5 16:29
  */
-public class Router<Handler> {
+public class RouterImpl<Handler> implements Router<Handler> {
 
-    private Map<String, Route> routes;
+    private Map<HttpMethod, Route> routes;
 
     private Map<String, Handler> handlers;
 
-    public static <Handler> Router<Handler> router() {
-        return new Router<>();
-    }
-
-    public Router() {
+    public RouterImpl() {
         this.routes = Coll.map();
         this.handlers = Coll.map();
     }
 
-    public static String[] toParts(String pattern) {
-        final String[] vs = pattern.split("/");
-
-        final List<String> parts = Coll.list();
-        for (String item : vs) {
-            if (!Objects.equals(item, "")) {
-                parts.add(item);
-                if (item.charAt(0) == '*') {
-                    break;
-                }
-            }
-        }
-
-        return parts.toArray(new String[0]);
-    }
-
-    public void addRoute(String method, String pattern, Handler handler) {
-        method = method.toUpperCase(Locale.ROOT);
-
+    /**
+     * 添加路由
+     *
+     * @param method  HTTP method
+     * @param pattern 路由规则
+     * @param handler 处理程序
+     * @throws IllegalArgumentException 当httpMethod解析错误时抛出
+     * @apiNote eg.<pre>
+     *     <code>router.addRoute("GET", "/", "1");</code>
+     *     <code>router.addRoute("GET", "/hello/:name", "2");</code>
+     *     <code>router.addRoute("GET", "/assets/*filepath", "5");</code>
+     * </pre>
+     */
+    public Router<Handler> addRoute(final HttpMethod method, final String pattern, final Handler handler) {
         final String[] parts = toParts(pattern);
 
         final String key = method + " - " + pattern;
@@ -62,11 +52,17 @@ public class Router<Handler> {
 
         routes.get(method).insert(pattern, 0, parts);
         handlers.put(key, handler);
+        return this;
     }
 
-    public Tuple2<Handler, Map<String, String>> getRoute(String method, String path) {
-        method = method.toUpperCase(Locale.ROOT);
-
+    /**
+     * 匹配路由
+     *
+     * @param method 方法
+     * @param path   路径
+     * @return {@link Tuple2 }<{@link Handler }, {@link Map }<{@link String }, {@link String }>>
+     */
+    public Tuple2<Handler, Map<String, String>> match(final HttpMethod method, final String path) {
         final String[] searchParts = toParts(path);
         final Map<String, String> params = Coll.map();
         Handler handler = null;
@@ -216,5 +212,6 @@ public class Router<Handler> {
         private boolean eq(String part, Route child) {
             return Lang.eq(child.part, part) || child.wildFlag;
         }
+
     }
 }
