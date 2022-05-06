@@ -3,7 +3,7 @@ package io.github.fzdwx.lambada.lang;
 import java.util.Locale;
 
 /**
- * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
+ * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/5/6 10:40
  */
 public enum HttpMethod {

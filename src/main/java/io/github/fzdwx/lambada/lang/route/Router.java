@@ -6,7 +6,8 @@ import io.github.fzdwx.lambada.lang.HttpMethod;
 import java.util.Map;
 
 /**
- * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
+ * router implementation
+ * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/5/6 10:54
  */
 public interface Router<Handler> {

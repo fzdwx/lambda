@@ -15,14 +15,16 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
+ * router implementation
+ *
+ * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/5/5 16:29
  */
 public class RouterImpl<Handler> implements Router<Handler> {
 
-    private Map<HttpMethod, Route> routes;
+    private final Map<HttpMethod, Route> routes;
 
-    private Map<String, Handler> handlers;
+    private final Map<String, Handler> handlers;
 
     public RouterImpl() {
         this.routes = Coll.map();
