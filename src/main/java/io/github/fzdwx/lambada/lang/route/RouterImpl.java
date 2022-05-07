@@ -11,7 +11,6 @@ import io.github.fzdwx.lambada.lang.NvMap;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -226,6 +225,10 @@ public class RouterImpl<Handler> implements Router<Handler> {
     }
 
     private String[] toParts(String pattern) {
+        if (pattern == null) {
+            return new String[0];
+        }
+
         final String[] vs = pattern.split("/");
 
         final List<String> parts = Coll.list();
