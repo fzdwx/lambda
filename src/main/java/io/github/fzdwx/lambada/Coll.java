@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -502,6 +503,121 @@ public interface Coll {
                                 final V v5, final K k6, final V v6, final K k7, final V v7, final K k8, final V v8, final K k9, final V v9,
                                 final K k10, final V v10) {
         final Map<K, V> map = new HashMap<>(6);
+        map.put(k1, v1);
+        map.put(k2, v2);
+        map.put(k3, v3);
+        map.put(k4, v4);
+        map.put(k5, v5);
+        map.put(k6, v6);
+        return map;
+    }
+
+    static <K, V> Map<K, V> linkedMap(@NonNull final List<K> keys, @NonNull final List<V> values) {
+        if (Lang.eq(keys.size(), values.size())) {
+            throw new IllegalArgumentException(Lang.format("Func map error : keys size :{},values size:{}; please check ", keys.size(), values.size()));
+        }
+        final Map<K, V> map = new LinkedHashMap<>();
+
+        for (int i = 0; i < keys.size(); i++) {
+            map.put(keys.get(i), values.get(i));
+        }
+        return map;
+    }
+
+
+    static <K, V> Map<K, V> linkedMap(final K key, final V val) {
+        final Map<K, V> map = new LinkedHashMap<>(1);
+        map.put(key, val);
+        return map;
+    }
+
+    static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2) {
+        final Map<K, V> map = new LinkedHashMap<>(2);
+        map.put(k1, v1);
+        map.put(k2, v2);
+        return map;
+    }
+
+    static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3) {
+        final Map<K, V> map = new LinkedHashMap<>(3);
+        map.put(k1, v1);
+        map.put(k2, v2);
+        map.put(k3, v3);
+        return map;
+    }
+
+    static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4) {
+        final Map<K, V> map = new LinkedHashMap<>(4);
+        map.put(k1, v1);
+        map.put(k2, v2);
+        map.put(k3, v3);
+        map.put(k4, v4);
+        return map;
+    }
+
+    static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
+                                final V v5) {
+        final Map<K, V> map = new LinkedHashMap<>(5);
+        map.put(k1, v1);
+        map.put(k2, v2);
+        map.put(k3, v3);
+        map.put(k4, v4);
+        map.put(k5, v5);
+        return map;
+    }
+
+    static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
+                                final V v5, final K k6, final V v6) {
+        final Map<K, V> map = new LinkedHashMap<>(6);
+        map.put(k1, v1);
+        map.put(k2, v2);
+        map.put(k3, v3);
+        map.put(k4, v4);
+        map.put(k5, v5);
+        map.put(k6, v6);
+        return map;
+    }
+
+    static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
+                                final V v5, final K k6, final V v6, final K k7, final V v7) {
+        final Map<K, V> map = new LinkedHashMap<>(6);
+        map.put(k1, v1);
+        map.put(k2, v2);
+        map.put(k3, v3);
+        map.put(k4, v4);
+        map.put(k5, v5);
+        map.put(k6, v6);
+        return map;
+    }
+
+    static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
+                                final V v5, final K k6, final V v6, final K k7, final V v7, final K k8, final V v8) {
+        final Map<K, V> map = new LinkedHashMap<>(6);
+        map.put(k1, v1);
+        map.put(k2, v2);
+        map.put(k3, v3);
+        map.put(k4, v4);
+        map.put(k5, v5);
+        map.put(k6, v6);
+        return map;
+    }
+
+    static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
+                                final V v5, final K k6, final V v6, final K k7, final V v7, final K k8, final V v8, final K k9, final V v9) {
+        final Map<K, V> map = new LinkedHashMap<>(6);
+        map.put(k1, v1);
+        map.put(k2, v2);
+        map.put(k3, v3);
+        map.put(k4, v4);
+        map.put(k5, v5);
+        map.put(k6, v6);
+        return map;
+    }
+
+    static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
+                                final V v5, final K k6, final V v6, final K k7, final V v7, final K k8, final V v8, final K k9, final V v9,
+                                final K k10, final V v10) {
+        final Map<K, V> map = new LinkedHashMap<>(6);
         map.put(k1, v1);
         map.put(k2, v2);
         map.put(k3, v3);
