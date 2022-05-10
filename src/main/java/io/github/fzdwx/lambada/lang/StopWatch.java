@@ -35,13 +35,13 @@ public class StopWatch {
      * @return ms
      */
     public long stop() {
-        final long ms = System.currentTimeMillis() - this.startTime;
+        final long ms = Time.now() - this.startTime;
         cache.remove(this.taskName);
         return ms;
     }
 
     public void stopAndPrint() {
-        System.out.println("taskName: " + this.taskName + " cost: " + (System.currentTimeMillis() - this.startTime) + " ms");
+        System.out.println("taskName: " + this.taskName + " cost: " + (Time.now() - this.startTime) + " ms");
         cache.remove(this.taskName);
     }
 }
