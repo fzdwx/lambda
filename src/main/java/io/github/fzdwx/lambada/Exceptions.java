@@ -1,37 +1,43 @@
 package io.github.fzdwx.lambada;
 
 /**
+ * exceptions.
+ *
  * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/3/23 12:03
  */
 public abstract class Exceptions {
 
-    public static RuntimeException propagate(Throwable t) {
-        throwIfFatal(t);
-        if (t instanceof RuntimeException) {
-            return (RuntimeException) t;
-        }
-        return new LambdaException(t);
-    }
-
-    public static void throwIfFatal(Throwable t) {
-        throwIfJvmFatal(t);
-    }
-
-    public static void throwIfJvmFatal(Throwable t) {
-        if (t instanceof VirtualMachineError) {
-            throw (VirtualMachineError) t;
-        }
-        if (t instanceof ThreadDeath) {
-            throw (ThreadDeath) t;
-        }
-        if (t instanceof LinkageError) {
-            throw (LinkageError) t;
-        }
-    }
-
-    public static void throwIllegalArgumentException(final String message) {
+    public static void illegalArgument(final String message) {
         throw new IllegalArgumentException(message);
+    }
+
+    public static void illegalArgument(final String message, final Throwable cause) {
+        throw new IllegalArgumentException(message, cause);
+    }
+
+    public static IllegalArgumentException newIllegalArgument(final String message) {
+        return new IllegalArgumentException(message);
+    }
+
+    public static IllegalArgumentException newIllegalArgument(final String message, final Throwable cause) {
+        return new IllegalArgumentException(message, cause);
+    }
+
+    public static void illegalState(final String message) {
+        throw new IllegalStateException(message);
+    }
+
+    public static IllegalStateException newIllegalState(final String message) {
+        return new IllegalStateException(message);
+    }
+
+    public static void illegalState(final String message, final Throwable cause) {
+        throw new IllegalStateException(message, cause);
+    }
+
+    public static IllegalStateException newIllegalState(final String message, final Throwable cause) {
+        return new IllegalStateException(message, cause);
     }
 
     static class LambdaException extends RuntimeException {

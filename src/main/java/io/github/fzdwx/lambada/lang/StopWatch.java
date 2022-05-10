@@ -21,7 +21,7 @@ public class StopWatch {
 
     public static StopWatch get(String taskName) {
         if (Lang.isBlank(taskName)) {
-            Exceptions.throwIllegalArgumentException("taskName is blank");
+            Exceptions.illegalArgument("taskName is blank");
         }
 
         final StopWatch stopWatch = new StopWatch(System.currentTimeMillis(), taskName);

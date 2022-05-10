@@ -26,6 +26,13 @@ public interface Io {
     }
 
     /**
+     * bytes to string.
+     */
+    static String toString(byte[] bytes) {
+        return new String(bytes);
+    }
+
+    /**
      * @see #read(String, int, int)
      */
     static String read(String str, int length) {

@@ -318,6 +318,48 @@ public interface Lang {
     }
 
     /**
+     * get string size.
+     */
+    static int size(String s) {
+        if (s == null) {
+            return 0;
+        }
+
+        return s.length();
+    }
+
+    /**
+     * get array size
+     */
+    static <T> int size(T[] arr) {
+        if (arr == null) {
+            return 0;
+        }
+        return arr.length;
+    }
+
+
+    /**
+     * get collection size
+     */
+    static <T> int size(Collection<T> collection) {
+        if (collection == null) {
+            return 0;
+        }
+        return collection.size();
+    }
+
+    /**
+     * get map size
+     */
+    static <K, V> int size(Map<K, V> map) {
+        if (map == null) {
+            return 0;
+        }
+        return map.size();
+    }
+
+    /**
      * 将提供的文本拆分为一个数组，指定分隔符。这是使用 StringTokenizer 的替代方法。
      * 返回的字符串数组中不包含分隔符。相邻的分隔符被视为一个分隔符。要对拆分进行更多控制，请使用 StrTokenizer 类。
      * null输入字符串返回null 。一个null的 separatorChars 在空白处分割。
