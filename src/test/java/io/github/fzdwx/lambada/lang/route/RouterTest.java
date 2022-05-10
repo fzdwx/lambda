@@ -2,6 +2,7 @@ package io.github.fzdwx.lambada.lang.route;
 
 import io.github.fzdwx.lambada.internal.Tuple2;
 import io.github.fzdwx.lambada.lang.NvMap;
+import io.github.fzdwx.lambada.http.Router;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package io.github.fzdwx.lambada.lang;
+package io.github.fzdwx.lambada.http;
 
 import java.util.Locale;
 

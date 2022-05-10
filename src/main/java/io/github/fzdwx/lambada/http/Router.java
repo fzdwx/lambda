@@ -1,7 +1,6 @@
-package io.github.fzdwx.lambada.lang.route;
+package io.github.fzdwx.lambada.http;
 
 import io.github.fzdwx.lambada.internal.Tuple2;
-import io.github.fzdwx.lambada.lang.HttpMethod;
 import io.github.fzdwx.lambada.lang.NvMap;
 
 import java.util.Map;

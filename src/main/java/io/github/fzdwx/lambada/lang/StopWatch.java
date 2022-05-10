@@ -2,6 +2,7 @@ package io.github.fzdwx.lambada.lang;
 
 import io.github.fzdwx.lambada.Exceptions;
 import io.github.fzdwx.lambada.Lang;
+import io.github.fzdwx.lambada.Time;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Map;
