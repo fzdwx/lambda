@@ -11,11 +11,7 @@ import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * lang.
@@ -193,12 +189,38 @@ public interface Lang {
     }
 
     /**
+     * 检查 CharSequence 是否不为空 ("")、null 或仅空格。
+     * 空白由Character.isWhitespace(char)定义。
+     * isNotBlank(null)      = false
+     * isNotBlank("")        = false
+     * isNotBlank(" ")       = false
+     * isNotBlank("bob")     = true
+     * isNotBlank("  bob  ") = true
+     *
+     * @param s str
+     * @return boolean
+     * @since 0.04
+     */
+    static boolean isNotBlank(String s) {
+        return !isBlank(s);
+    }
+
+    /**
      * 判断 obj 是否为null
      *
      * @since 0.04
      */
     static boolean isNull(Object obj) {
         return obj == null;
+    }
+
+    /**
+     * 判断 obj 是否不为null
+     *
+     * @since 0.04
+     */
+    static boolean isNotNull(Object obj) {
+        return !isNull(obj);
     }
 
     /**
@@ -214,10 +236,44 @@ public interface Lang {
     }
 
     /**
+     * 数组是否不为空
+     *
+     * @param <T>   数组元素类型
+     * @param array 数组
+     * @return 是否不为空
+     * @since 0.04
+     */
+    static <T> boolean isNotEmpty(T[] array) {
+        return !isEmpty(array);
+    }
+
+    /**
      * 判断集合是否为空
      */
     static <T> boolean isEmpty(Collection<T> collection) {
         return collection == null || collection.isEmpty();
+    }
+
+    /**
+     * 判断集合是否不为空
+     */
+    static <T> boolean isNotEmpty(Collection<T> collection) {
+        return !isEmpty(collection);
+    }
+
+
+    /**
+     * 判断map是否为空
+     */
+    static <K, V> boolean isEmpty(Map<K, V> map) {
+        return map == null || map.isEmpty();
+    }
+
+    /**
+     * 判断map是否不为空
+     */
+    static <K, V> boolean isNotEmpty(Map<K, V> map) {
+        return !isEmpty(map);
     }
 
     /**
@@ -341,6 +397,15 @@ public interface Lang {
      */
     static boolean isEmpty(String s) {
         return s == null || s.length() == 0;
+    }
+
+    /**
+     * 检查字符串是否不为空
+     *
+     * @param s string
+     */
+    static boolean isNotEmpty(String s) {
+        return !isEmpty(s);
     }
 
     /**
