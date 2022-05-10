@@ -40,6 +40,14 @@ public abstract class Exceptions {
         return new IllegalStateException(message, cause);
     }
 
+    public static void npe(final String message) {
+        throw new NullPointerException(message);
+    }
+
+    public static NullPointerException newNpe(final String message) {
+        return new NullPointerException(message);
+    }
+
     static class LambdaException extends RuntimeException {
 
         LambdaException(final Throwable t) {
