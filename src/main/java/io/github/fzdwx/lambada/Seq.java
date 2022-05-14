@@ -1,6 +1,7 @@
 package io.github.fzdwx.lambada;
 
 
+import io.github.fzdwx.lambada.internal.IntStream;
 import io.github.fzdwx.lambada.internal.SeqImpl;
 import io.github.fzdwx.lambada.internal.Tuple2;
 
@@ -16,7 +17,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
