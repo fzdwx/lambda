@@ -122,6 +122,15 @@ public interface Console {
         return ANSI_WHITE + o + ANSI_RESET;
     }
 
+    static void cyanln(Object txt) {
+        out.println(ANSI_CYAN + txt);
+        out.print(ANSI_RESET);
+    }
+
+    static String cyan(Object o) {
+        return ANSI_CYAN + o + ANSI_RESET;
+    }
+
     // --------------------------------------------------------------------------------- Log
 
     /**
