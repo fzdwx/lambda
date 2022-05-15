@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
  * @date 2022/5/14 17:31
@@ -21,6 +19,11 @@ class ConsoleTest {
                 System.out.println(Console.where());
             }
         }
+    }
+
+    @Test
+    void test_2() {
+        Console.print(Console.green("hello")+Console.red("world"));
     }
 
     @Test

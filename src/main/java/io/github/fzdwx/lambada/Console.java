@@ -69,9 +69,17 @@ public interface Console {
         out.print(ANSI_RESET);
     }
 
+    static String black(Object o) {
+        return ANSI_BLACK + o + ANSI_RESET;
+    }
+
     static void redln(Object txt) {
         out.println(ANSI_RED + txt);
         out.print(ANSI_RESET);
+    }
+
+    static String red(Object o) {
+        return ANSI_RED + o + ANSI_RESET;
     }
 
     static void blueln(Object txt) {
@@ -79,9 +87,17 @@ public interface Console {
         out.print(ANSI_RESET);
     }
 
+    static String blue(Object o) {
+        return ANSI_BLUE + o + ANSI_RESET;
+    }
+
     static void greenln(Object txt) {
         out.println(ANSI_GREEN + txt);
         out.print(ANSI_RESET);
+    }
+
+    static String green(Object o) {
+        return ANSI_GREEN + o + ANSI_RESET;
     }
 
     static void purpleln(String txt) {
@@ -89,9 +105,21 @@ public interface Console {
         out.print(ANSI_RESET);
     }
 
+    static String purple(Object o) {
+        return ANSI_PURPLE + o + ANSI_RESET;
+    }
+
     static void yellowln(Object txt) {
         out.println(ANSI_YELLOW + txt);
         out.print(ANSI_RESET);
+    }
+
+    static String yellow(Object o) {
+        return ANSI_YELLOW + o + ANSI_RESET;
+    }
+
+    static String white(Object o) {
+        return ANSI_WHITE + o + ANSI_RESET;
     }
 
     // --------------------------------------------------------------------------------- Log
