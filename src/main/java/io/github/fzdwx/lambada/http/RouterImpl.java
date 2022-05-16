@@ -2,7 +2,7 @@ package io.github.fzdwx.lambada.http;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
-import io.github.fzdwx.lambada.Coll;
+import io.github.fzdwx.lambada.Collections;
 import io.github.fzdwx.lambada.Lang;
 import io.github.fzdwx.lambada.Tuple;
 import io.github.fzdwx.lambada.internal.Tuple2;
@@ -27,8 +27,8 @@ public class RouterImpl<Handler> implements Router<Handler> {
     private final Map<String, Handler> handlers;
 
     public RouterImpl() {
-        this.routes = Coll.map();
-        this.handlers = Coll.map();
+        this.routes = Collections.map();
+        this.handlers = Collections.map();
     }
 
     /**
@@ -124,12 +124,12 @@ public class RouterImpl<Handler> implements Router<Handler> {
         public Route(final String part) {
             this.part = part;
             this.wildFlag = part.charAt(0) == ':' || part.charAt(0) == '*';
-            this.children = Coll.list();
+            this.children = Collections.list();
         }
 
         public Route() {
             this.wildFlag = false;
-            this.children = Coll.list();
+            this.children = Collections.list();
         }
 
 
@@ -180,7 +180,7 @@ public class RouterImpl<Handler> implements Router<Handler> {
          */
         @NonNull
         public List<Route> matchChildren(String part) {
-            List<Route> routes = Coll.list();
+            List<Route> routes = Collections.list();
 
             if (isEmpty()) {
                 return routes;
@@ -230,7 +230,7 @@ public class RouterImpl<Handler> implements Router<Handler> {
 
         final String[] vs = pattern.split("/");
 
-        final List<String> parts = Coll.list();
+        final List<String> parts = Collections.list();
         for (String item : vs) {
             if (!Objects.equals(item, "")) {
                 parts.add(item);

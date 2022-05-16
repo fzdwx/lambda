@@ -230,7 +230,7 @@ public interface Seq<T> extends Stream<T> {
                                   final Function<T, K> keyMapper
     ) {
         if (Lang.isEmpty(collection)) {
-            return Coll.map();
+            return Collections.map();
         }
         return toMap(Seq.of(collection), keyMapper, Function.identity());
     }
@@ -243,7 +243,7 @@ public interface Seq<T> extends Stream<T> {
                                   final Function<T, K> keyMapper
     ) {
         if (stream == null) {
-            return Coll.map();
+            return Collections.map();
         }
         return toMap(Seq.of(stream), keyMapper, Function.identity());
     }
@@ -268,7 +268,7 @@ public interface Seq<T> extends Stream<T> {
                                      final Function<? super T, ? extends V> valueMapper
     ) {
         if (seq == null) {
-            return Coll.map();
+            return Collections.map();
         }
         return seq.toMap(keyMapper, valueMapper);
     }
