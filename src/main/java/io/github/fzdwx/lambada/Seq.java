@@ -132,11 +132,20 @@ public interface Seq<T> extends Stream<T> {
         return !this.isEmpty();
     }
 
+    /**
+     * collect to map.
+     *
+     * @apiNote this method is a shortcut for {@code collect(Collectors.toMap(keyMapper, valueMapper))},
+     */
     default <K, V> Map<K, V> toMap(final Function<? super T, ? extends K> keyMapper,
                                    final Function<? super T, ? extends V> valueMapper) {
         return this.collect(Collectors.toMap(keyMapper, valueMapper));
     }
 
+    /**
+     * @apiNote the value is {@code <T> }
+     * @see #toMap(Seq, Function, Function)
+     */
     default <K> Map<K, T> toMap(final Function<? super T, ? extends K> keyMapper) {
         return this.collect(Collectors.toMap(keyMapper, Function.identity()));
     }
