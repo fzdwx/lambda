@@ -3,7 +3,7 @@ package io.github.fzdwx.lambada;
 
 import cn.hutool.core.collection.CollUtil;
 import com.google.common.collect.Sets;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import io.github.fzdwx.lambada.anno.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;

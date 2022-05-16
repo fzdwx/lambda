@@ -7,8 +7,8 @@ import io.github.fzdwx.lambada.Lang;
 import io.github.fzdwx.lambada.Tuple;
 import io.github.fzdwx.lambada.internal.Tuple2;
 import io.github.fzdwx.lambada.lang.NvMap;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import io.github.fzdwx.lambada.anno.NonNull;
+import io.github.fzdwx.lambada.anno.Nullable;
 
 import java.util.List;
 import java.util.Map;

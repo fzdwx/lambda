@@ -5,7 +5,7 @@ import cn.hutool.core.text.StrFormatter;
 import cn.hutool.core.text.StrPool;
 import io.github.fzdwx.lambada.internal.LangUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import io.github.fzdwx.lambada.anno.Nullable;
 
 import java.math.BigDecimal;
 import java.nio.charset.Charset;

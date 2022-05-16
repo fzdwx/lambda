@@ -1,6 +1,7 @@
 package io.github.fzdwx.lambada;
 
 
+import io.github.fzdwx.lambada.anno.NonNull;
 import io.github.fzdwx.lambada.internal.IntStream;
 import io.github.fzdwx.lambada.internal.SeqImpl;
 import io.github.fzdwx.lambada.internal.Tuple2;
@@ -210,6 +211,57 @@ public interface Seq<T> extends Stream<T> {
 
     default void println() {
         this.forEach(System.out::println);
+    }
+
+    /**
+     * @apiNote the value is {@code <T> }
+     * @see #toMap(Seq, Function, Function)
+     */
+    static <K, T> Map<K, T> toMap(@NonNull final Collection<T> collection,
+                                  final Function<T, K> keyMapper
+    ) {
+        if (Lang.isEmpty(collection)) {
+            return Coll.map();
+        }
+        return toMap(Seq.of(collection), keyMapper, Function.identity());
+    }
+
+    /**
+     * @apiNote the value is {@code <T> }
+     * @see #toMap(Seq, Function, Function)
+     */
+    static <K, T> Map<K, T> toMap(@NonNull final Stream<T> stream,
+                                  final Function<T, K> keyMapper
+    ) {
+        if (stream == null) {
+            return Coll.map();
+        }
+        return toMap(Seq.of(stream), keyMapper, Function.identity());
+    }
+
+    /**
+     * @apiNote the value is {@code <T> }
+     * @see #toMap(Seq, Function, Function)
+     */
+    static <K, T> Map<K, T> toMap(@NonNull final Seq<T> seq,
+                                  final Function<T, K> keyMapper
+    ) {
+        return seq.toMap(keyMapper);
+    }
+
+    /**
+     * collect to map.
+     *
+     * @apiNote this method is a shortcut for {@code collect(Collectors.toMap(keyMapper, valueMapper))},
+     */
+    static <K, T, V> Map<K, V> toMap(@NonNull final Seq<T> seq,
+                                     final Function<? super T, ? extends K> keyMapper,
+                                     final Function<? super T, ? extends V> valueMapper
+    ) {
+        if (seq == null) {
+            return Coll.map();
+        }
+        return seq.toMap(keyMapper, valueMapper);
     }
 
     /**
