@@ -110,7 +110,7 @@ public interface Seq<T> extends Stream<T> {
     }
 
     /**
-     * 强转类型
+     * cast to {@code <U>}
      *
      * @return {@link Seq<U> }
      */

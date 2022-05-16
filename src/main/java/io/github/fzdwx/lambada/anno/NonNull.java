@@ -7,18 +7,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * just mark, no effect.
+ * mark value maybe null.
  *
- * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
- * @apiNote mark value maybe null.
+ * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
+ * @apiNote just mark, no effect.
  * @date 2022/5/16 14:13
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({
-        ElementType.TYPE_USE,
-        ElementType.TYPE_PARAMETER,
-        ElementType.METHOD
-})
-public @interface NonNull {
-}
+@Target({ElementType.TYPE_USE, ElementType.TYPE_PARAMETER, ElementType.METHOD})
+public @interface NonNull { }
