@@ -462,6 +462,8 @@ public interface Lang {
      */
     Charset CHARSET = StandardCharsets.UTF_8;
 
+    String EMPTY_STR = "";
+
     @Nullable
     static <T> T first(Collection<T> collection) {
         if (collection == null || collection.isEmpty()) {

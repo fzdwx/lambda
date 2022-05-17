@@ -1,6 +1,15 @@
 package io.github.fzdwx.lambada.http;
 
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONUtil;
+import io.github.fzdwx.lambada.Lang;
+import io.github.fzdwx.lambada.Seq;
+import io.github.fzdwx.lambada.anno.Nullable;
+
 import java.nio.charset.Charset;
+import java.util.List;
+import java.util.Map;
 
 /**
  * http content type
@@ -235,4 +244,41 @@ public enum ContentType {
     public String addEncode(Charset charset) {
         return value + "; charset=" + charset.name();
     }
+
+    /**
+     * 如果 MIME 类型未知，则返回null
+     */
+    @Nullable
+    public static String parseFromFileName(String file) {
+        if (file == null) {
+            return null;
+        }
+        int period = file.lastIndexOf('.');
+        if (period < 0) {
+            return null;
+        }
+        String extension = file.substring(period + 1);
+        if (extension.length() < 1) {
+            return null;
+        }
+        return parse(extension);
+    }
+
+    @Nullable
+    public static String parse(String ext) {
+        if (ext == null || ext.isEmpty()) return null;
+        return Parse.m.get(ext);
+    }
+
+    static class Parse {
+
+        static Map<String, String> m;
+
+        static {
+            final String s = FileUtil.readString("mime.json", Lang.CHARSET);
+            final List<JSONArray> list = JSONUtil.toBean(s, List.class);
+            m = Seq.toMap(list, o1 -> o1.getStr(0), o2 -> o2.getStr(1));
+        }
+    }
+
 }

@@ -239,6 +239,20 @@ public interface Seq<T> extends Stream<T> {
      * @apiNote the value is {@code <T> }
      * @see #toMap(Seq, Function, Function)
      */
+    static <K, T, V> Map<K, V> toMap(@NonNull final Collection<T> collection,
+                                     final Function<? super T, ? extends K> keyMapper,
+                                     final Function<? super T, ? extends V> valueMapper
+    ) {
+        if (collection == null) {
+            return Collections.map();
+        }
+        return toMap(Seq.of(collection), keyMapper, valueMapper);
+    }
+
+    /**
+     * @apiNote the value is {@code <T> }
+     * @see #toMap(Seq, Function, Function)
+     */
     static <K, T> Map<K, T> toMap(@NonNull final Stream<T> stream,
                                   final Function<T, K> keyMapper
     ) {
@@ -246,6 +260,20 @@ public interface Seq<T> extends Stream<T> {
             return Collections.map();
         }
         return toMap(Seq.of(stream), keyMapper, Function.identity());
+    }
+
+    /**
+     * @apiNote the value is {@code <T> }
+     * @see #toMap(Seq, Function, Function)
+     */
+    static <K, T, V> Map<K, V> toMap(@NonNull final Stream<T> stream,
+                                     final Function<? super T, ? extends K> keyMapper,
+                                     final Function<? super T, ? extends V> valueMapper
+    ) {
+        if (stream == null) {
+            return Collections.map();
+        }
+        return toMap(Seq.of(stream), keyMapper, valueMapper);
     }
 
     /**
