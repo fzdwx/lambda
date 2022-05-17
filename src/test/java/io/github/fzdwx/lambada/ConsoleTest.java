@@ -23,14 +23,14 @@ class ConsoleTest {
 
     @Test
     void test_2() {
-        Console.print(Console.green("hello")+Console.red("world"));
+        Console.print(Console.green("hello") + Console.red("world"));
     }
 
     @Test
     void test_1() {
         Console.greenln("hello world");
         Seq.range(100).forEach(i -> {
-            Lang.sleep(Duration.ofMillis(100));
+            Threads.sleep(Duration.ofMillis(100));
             Console.printProgress('#', i);
         });
     }

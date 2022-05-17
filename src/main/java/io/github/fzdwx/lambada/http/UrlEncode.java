@@ -6,36 +6,32 @@ import cn.hutool.core.codec.PercentCodec;
  * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/5/17 11:39
  */
-public class UrlEncode {
+public interface UrlEncode {
 
-    public static PercentCodec DEFAULT;
-
-    static {
-        DEFAULT = PercentCodec.of(
-                "-" +
-                        "." +
-                        "_" +
-                        "~" +
-                        "!" +
-                        "$" +
-                        "&" +
-                        "\\" +
-                        "(" +
-                        ")" +
-                        "*" +
-                        "+" +
-                        "," +
-                        ";" +
-                        "=" +
-                        ":" +
-                        "@" +
-                        "/" +
-                        "*" +
-                        "-" +
-                        "." +
-                        "_" +
-                        "=" +
-                        "&"
-        );
-    }
+    PercentCodec DEFAULT = PercentCodec.of(
+            "-" +
+                    "." +
+                    "_" +
+                    "~" +
+                    "!" +
+                    "$" +
+                    "&" +
+                    "\\" +
+                    "(" +
+                    ")" +
+                    "*" +
+                    "+" +
+                    "," +
+                    ";" +
+                    "=" +
+                    ":" +
+                    "@" +
+                    "/" +
+                    "*" +
+                    "-" +
+                    "." +
+                    "_" +
+                    "=" +
+                    "&"
+    );
 }

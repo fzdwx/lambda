@@ -3,14 +3,14 @@ package io.github.fzdwx.lambada;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.StrFormatter;
 import cn.hutool.core.text.StrPool;
-import io.github.fzdwx.lambada.internal.LangUtil;
-import org.apache.commons.lang3.StringUtils;
 import io.github.fzdwx.lambada.anno.Nullable;
+import io.github.fzdwx.lambada.internal.LangUtil;
+import io.github.fzdwx.lambada.lang.StringPool;
+import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -39,24 +39,6 @@ public interface Lang {
 
     static <T> T todo(final String msg) {
         throw new RuntimeException(msg);
-    }
-
-    /**
-     * 使当前执行的线程休眠（暂时停止执行）指定的毫秒数，取决于系统计时器和调度程序的精度和准确性。 该线程不会失去任何监视器的所有权。
-     *
-     * @param sleepTime 睡眠时间
-     * @return 被中断返回false，否则true
-     */
-    static boolean sleep(final Duration sleepTime) {
-        final long millis = sleepTime.toMillis();
-        if (millis > 0) {
-            try {
-                Thread.sleep(millis);
-            } catch (final InterruptedException ignore) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
@@ -456,13 +438,111 @@ public interface Lang {
     }
 
     /**
+     * @see org.springframework.util.StringUtils#trimWhitespace(String)
+     */
+    static String trimWhitespace(String s) {
+        return org.springframework.util.StringUtils.trimWhitespace(s);
+    }
+
+    /**
+     * @see org.springframework.util.StringUtils#trimAllWhitespace(String)
+     */
+    static String trimAllWhitespace(String s) {
+        return org.springframework.util.StringUtils.trimAllWhitespace(s);
+    }
+
+    /**
+     * @see org.springframework.util.StringUtils#trimLeadingWhitespace(String)
+     */
+    static String trimLeadingWhitespace(String s) {
+        return org.springframework.util.StringUtils.trimLeadingWhitespace(s);
+    }
+
+    /**
+     * @see org.springframework.util.StringUtils#trimTrailingWhitespace(String)
+     */
+    static String trimTrailingWhitespace(String s) {
+        return org.springframework.util.StringUtils.trimTrailingWhitespace(s);
+    }
+
+    /**
+     * @see org.springframework.util.StringUtils#replace
+     */
+    static String replace(String in, String oldPattern, String newPattern) {
+        return org.springframework.util.StringUtils.replace(in, oldPattern, newPattern);
+    }
+
+    /**
+     * @see org.springframework.util.StringUtils#countOccurrencesOf
+     */
+    static int count(String str, String sub) {
+        return org.springframework.util.StringUtils.countOccurrencesOf(str, sub);
+    }
+
+    /**
+     * @see org.springframework.util.StringUtils#startsWithIgnoreCase
+     */
+    static boolean startsWithIgnoreCase(@Nullable String str, @Nullable String prefix) {
+        return org.springframework.util.StringUtils.startsWithIgnoreCase(str, prefix);
+    }
+
+    /**
+     * @see org.springframework.util.StringUtils#endsWithIgnoreCase
+     */
+    static boolean endsWithIgnoreCase(@Nullable String str, @Nullable String suffix) {
+        return org.springframework.util.StringUtils.endsWithIgnoreCase(str, suffix);
+    }
+
+    /**
+     * @see org.springframework.util.StringUtils#delete
+     */
+    static String delete(String in, String pattern) {
+        return replace(in, pattern, EMPTY_STR);
+    }
+
+    /**
+     * @see org.springframework.util.StringUtils#deleteAny
+     */
+    static String deleteAny(String in, @Nullable String charsToDelete) {
+        return org.springframework.util.StringUtils.deleteAny(in, charsToDelete);
+    }
+
+    /**
+     * @see org.springframework.util.StringUtils#unqualify
+     */
+    static String unqualify(String qualifiedName) {
+        return unqualify(qualifiedName, '.');
+    }
+
+    /**
+     * @see org.springframework.util.StringUtils#unqualify(String, char)
+     */
+    static String unqualify(String qualifiedName, char separator) {
+        return qualifiedName.substring(qualifiedName.lastIndexOf(separator) + 1);
+    }
+
+    /**
+     * @see org.springframework.util.StringUtils#capitalize
+     */
+    static String capitalize(String str) {
+        return org.springframework.util.StringUtils.capitalize(str);
+    }
+
+    /**
+     * @see org.springframework.util.StringUtils#uncapitalize
+     */
+    static String uncapitalize(String str) {
+        return org.springframework.util.StringUtils.uncapitalize(str);
+    }
+
+    /**
      * default charset
      *
      * @since 0.06
      */
     Charset CHARSET = StandardCharsets.UTF_8;
 
-    String EMPTY_STR = "";
+    String EMPTY_STR = StringPool.EMPTY;
 
     @Nullable
     static <T> T first(Collection<T> collection) {

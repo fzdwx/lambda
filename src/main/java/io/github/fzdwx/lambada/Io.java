@@ -1,8 +1,19 @@
 package io.github.fzdwx.lambada;
 
-import lombok.NonNull;
+import io.github.fzdwx.lambada.anno.NonNull;
+import io.github.fzdwx.lambada.anno.Nullable;
+import io.github.fzdwx.lambada.lang.StringPool;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.nio.charset.Charset;
 
 /**
  * io util.
@@ -12,17 +23,112 @@ import java.io.ByteArrayInputStream;
  */
 public interface Io {
 
-    String EMPTY = "";
+    int DEFAULT_SIZE = 4096;
 
     /**
-     * 包装 字节数组到 字节输入流
+     * wrap bytes to inputStream.
      *
-     * @param bytes 字节数组
      * @return {@link ByteArrayInputStream }
      * @apiNote byte[] -> ByteArrayInputStream,bytes not null.
      */
-    static ByteArrayInputStream wrap(byte @NonNull [] bytes) {
+    static ByteArrayInputStream wrap(@NonNull byte[] bytes) {
         return new ByteArrayInputStream(bytes);
+    }
+
+    /**
+     * wrap string to outputStream.
+     *
+     * @throws IOException if an I/O error occurs
+     * @apiNote charset default UTF-8.
+     */
+    static OutputStream wrapToOut(String in, Charset charset) throws IOException {
+        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+        transform(in, charset, bos);
+        return bos;
+    }
+
+    /**
+     * read inputStream to bytes.
+     *
+     * @throws IOException if an I/O error occurs
+     */
+    static byte[] toBytes(@Nullable InputStream in) throws IOException {
+        if (in == null) {
+            return new byte[0];
+        }
+
+        final ByteArrayOutputStream out = new ByteArrayOutputStream(DEFAULT_SIZE);
+        transform(in, out);
+        return out.toByteArray();
+    }
+
+    /**
+     * read inputStream to string.
+     *
+     * @throws IOException if an I/O error occurs
+     */
+    static String toString(@Nullable InputStream in, @NonNull Charset charset) throws IOException {
+        if (in == null) {
+            return StringPool.EMPTY;
+        }
+        StringBuilder out = new StringBuilder(DEFAULT_SIZE);
+        InputStreamReader reader = new InputStreamReader(in, charset);
+        char[] buffer = new char[DEFAULT_SIZE];
+        int charsRead;
+        while ((charsRead = reader.read(buffer)) != -1) {
+            out.append(buffer, 0, charsRead);
+        }
+        return out.toString();
+    }
+
+    /**
+     * copy outputStream to string.
+     */
+    static String toString(ByteArrayOutputStream baos, Charset charset) {
+        Assert.nonNull(baos, "No ByteArrayOutputStream specified");
+        Assert.nonNull(charset, "No Charset specified");
+        try {
+            // Can be replaced with toString(Charset) call in Java 10+
+            return baos.toString(charset.name());
+        } catch (UnsupportedEncodingException ex) {
+            // Should never happen
+            throw new IllegalArgumentException("Invalid charset name: " + charset, ex);
+        }
+    }
+
+    /**
+     * read string write to outputStream.
+     *
+     * @throws IOException if an I/O error occurs
+     */
+    static void transform(@NonNull String in, @NonNull Charset charset, @NonNull OutputStream out) throws IOException {
+        Assert.nonNull(in, "input stream not found.");
+        Assert.nonNull(out, "output stream not found.");
+        Assert.nonNull(charset, "charset not found.");
+        Writer writer = new OutputStreamWriter(out, charset);
+        writer.write(in);
+        writer.flush();
+    }
+
+    /**
+     * transfer inputStream to outputStream.
+     *
+     * @throws IOException if an I/O error occurs
+     */
+    static int transform(@NonNull InputStream in, @NonNull OutputStream out) throws IOException {
+        Assert.nonNull(in, "input stream not found.");
+        Assert.nonNull(out, "output stream not found.");
+
+        int byteCount = 0;
+        byte[] buffer = new byte[DEFAULT_SIZE];
+        int bytesRead;
+        while ((bytesRead = in.read(buffer)) != -1) {
+            out.write(buffer, 0, bytesRead);
+            byteCount += bytesRead;
+        }
+        out.flush();
+        return byteCount;
     }
 
     /**
@@ -87,7 +193,7 @@ public interface Io {
         }
 
         if (fromIndexInclude == toIndexExclude) {
-            return EMPTY;
+            return StringPool.EMPTY;
         }
 
         return str.substring(fromIndexInclude, toIndexExclude);
