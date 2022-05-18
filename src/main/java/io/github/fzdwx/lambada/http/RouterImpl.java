@@ -47,7 +47,7 @@ public class RouterImpl<Handler> implements Router<Handler> {
             routes.put(method, new RouteImpl());
         }
 
-        routes.get(method).insert(pattern, 0, handler, parts);
+        routes.get(method).insert(HttpPath.format(pattern), 0, handler, parts);
         return this;
     }
 
@@ -135,8 +135,7 @@ public class RouterImpl<Handler> implements Router<Handler> {
 
         public RouteImpl search(final int height, String... parts) {
             if (Lang.eq(parts.length, height) || StrUtil.startWith(this.part, "*")) {
-                if ("".equals(this.pattern)
-                        || this.handler == null) {
+                if (this.handler == null) {
                     return null;
                 }
 
