@@ -328,11 +328,32 @@ public interface Seq<T> extends Stream<T> {
         return of(stream.skip(elements));
     }
 
-    static <T> List<T> sort(List<T> T) {
-        return T.stream().sorted().collect(Collectors.toList());
+    /**
+     * @see #sort(Collection, Comparator)
+     */
+    static <T> List<T> sort(@NonNull Stream<T> s) {
+        return s.sorted().collect(Collectors.toList());
     }
 
-    static <T> List<T> sort(List<T> T, Comparator<? super T> comparator) {
-        return T.stream().sorted().collect(Collectors.toList());
+    /**
+     * @see #sort(Collection, Comparator)
+     */
+    static <T> List<T> sort(@NonNull Stream<T> s, Comparator<? super T> comparator) {
+        return s.sorted(comparator).collect(Collectors.toList());
+    }
+
+    /**
+     * @see #sort(Collection, Comparator)
+     */
+    static <T> List<T> sort(Collection<T> list) {
+        return list.stream().sorted().collect(Collectors.toList());
+    }
+
+    /**
+     * @return {@link List }<{@link T }>
+     * @apiNote this method is a shortcut for {@code stream().sorted(comparator).collect(Collectors.toList())},
+     */
+    static <T> List<T> sort(Collection<T> list, Comparator<? super T> comparator) {
+        return list.stream().sorted(comparator).collect(Collectors.toList());
     }
 }
