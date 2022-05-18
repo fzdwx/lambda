@@ -60,11 +60,7 @@ public class RouterImpl<Handler> implements Router<Handler> {
      */
     public Route<Handler> match(final HttpMethod method, final String path) {
         final String[] searchParts = toParts(path);
-        final RouteImpl route = routes.get(method).search(0, searchParts);
-        if (route != null) {
-            return route.setSearchParts(searchParts);
-        }
-        return null;
+        return routes.get(method).search(0, searchParts);
     }
 
     public class RouteImpl implements Router.Route<Handler> {
@@ -74,6 +70,8 @@ public class RouterImpl<Handler> implements Router<Handler> {
          * e.g: /hello/world
          */
         private String pattern;
+
+        private String[] patternParts;
 
         /**
          * pattern中的一部分
@@ -88,17 +86,23 @@ public class RouterImpl<Handler> implements Router<Handler> {
 
         /**
          * 是否为精确匹配,有:或*时为true
+         *
+         * @apiNote <pre>
+         *     1. startWith :
+         *     2. startWith *
+         *     3. startWith {  &&  endWith }
+         * </pre>
          */
         private final boolean wildFlag;
         private Handler handler;
 
-
-        // temp
-        private String[] searchParts;
-
         public RouteImpl(final String part) {
             this.part = part;
-            this.wildFlag = part.charAt(0) == ':' || part.charAt(0) == '*';
+            if (springType(part)) {
+                this.wildFlag = true;
+            } else {
+                this.wildFlag = part.charAt(0) == ':' || part.charAt(0) == '*';
+            }
             this.children = Collections.list();
         }
 
@@ -112,9 +116,10 @@ public class RouterImpl<Handler> implements Router<Handler> {
          */
         public void insert(String pattern, int height, final Handler handler, String... parts) throws IllegalArgumentException {
 
-            if (Lang.eq(parts.length, height)) {
+            if (Lang.eq(parts.length, height)) { // init parent.
                 this.pattern = pattern;
                 this.handler = handler;
+                this.patternParts = toParts(pattern);
                 return;
             }
 
@@ -201,32 +206,30 @@ public class RouterImpl<Handler> implements Router<Handler> {
         @Override
         public NvMap extract(final String path) {
             final NvMap nvMap = NvMap.create();
-            if (searchParts == null) {
+
+            if (path == null) {
                 return nvMap;
             }
 
-            String[] parts = toParts(this.pattern);
+            final String[] searchParts = toParts(path);
+
+            String[] parts = this.patternParts;
             for (int i = 0; i < parts.length; i++) {
                 final String part = parts[i];
                 if (part.charAt(0) == ':') {
                     nvMap.put(part.substring(1), searchParts[i]);
                 }
+
                 if (part.charAt(0) == '*' && part.length() > 1) {
                     nvMap.put(part.substring(1), ArrayUtil.join(ArrayUtil.sub(searchParts, i, searchParts.length), "/"));
                     break;
                 }
+
+                if (springType(part)) {
+                    nvMap.put(part.substring(1, part.length() - 1), searchParts[i]);
+                }
             }
-            clearSearchParts();
             return nvMap;
-        }
-
-        private Route<Handler> setSearchParts(final String[] searchParts) {
-            this.searchParts = searchParts;
-            return this;
-        }
-
-        private void clearSearchParts() {
-            this.searchParts = null;
         }
 
         private boolean isEmpty() {
@@ -237,6 +240,10 @@ public class RouterImpl<Handler> implements Router<Handler> {
             return Lang.eq(child.part, part) || child.wildFlag;
         }
 
+    }
+
+    private boolean springType(final String part) {
+        return part.charAt(0) == '{' && part.charAt(part.length() - 1) == '}';
     }
 
     private String[] toParts(String pattern) {

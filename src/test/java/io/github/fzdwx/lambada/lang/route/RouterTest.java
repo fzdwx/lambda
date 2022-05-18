@@ -21,8 +21,10 @@ class RouterTest {
         router.addRoute("GET", "/hi/:name", "4");
         router.addRoute("GET", "/assets/*filepath", "5");
         router.addRoute("GET", "/hhhh", "6");
+        router.addRoute("GET", "/hhhh/{name}", "7");
 
 
+        Assertions.assertEquals(router.match("GET", "/hhhh/fzdwx").extract("/hhhh/fzdwx").get("name"), "fzdwx");
         Assertions.assertEquals(router.match("GET", "/hhhh").handler(), "6");
         Assertions.assertEquals(router.match("GET", "/").handler(), "1");
         final Router.Route<Object> assets = router.match("GET", "/assets/123filepath");

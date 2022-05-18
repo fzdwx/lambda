@@ -11,6 +11,15 @@ import io.github.fzdwx.lambada.lang.NvMap;
  */
 public interface Router<Handler> {
 
+    /**
+     * default impl
+     *
+     * @apiNote support<pre>
+     *     1./hello/:name -> get name
+     *     2./assets/*filepath -> get filepath
+     *     3./assets/{name} -> get name
+     * </pre>
+     */
     static <Handler> RouterImpl<Handler> router() {
         return new RouterImpl<>();
     }
@@ -102,12 +111,8 @@ public interface Router<Handler> {
         Handler handler();
 
         /**
-         * 提取路径参数
-         * <p>
-         * 只支持 :或*开头的参数
-         *
-         * @apiNote 只能调用一次.
+         * extract path parameters.
          */
-        NvMap extract(String path);
+        NvMap extract(final String path);
     }
 }
