@@ -135,7 +135,8 @@ public class RouterImpl<Handler> implements Router<Handler> {
 
         public RouteImpl search(final int height, String... parts) {
             if (Lang.eq(parts.length, height) || StrUtil.startWith(this.part, "*")) {
-                if ("".equals(this.pattern)) {
+                if ("".equals(this.pattern)
+                        || this.handler == null) {
                     return null;
                 }
 
