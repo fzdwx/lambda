@@ -220,14 +220,12 @@ public class RouterImpl<Handler> implements Router<Handler> {
             return nvMap;
         }
 
-        @Override
-        public Route<Handler> setSearchParts(final String[] searchParts) {
+        private Route<Handler> setSearchParts(final String[] searchParts) {
             this.searchParts = searchParts;
             return this;
         }
 
-        @Override
-        public void clearSearchParts() {
+        private void clearSearchParts() {
             this.searchParts = null;
         }
 

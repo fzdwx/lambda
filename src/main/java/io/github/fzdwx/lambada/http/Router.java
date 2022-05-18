@@ -109,15 +109,5 @@ public interface Router<Handler> {
          * @apiNote 只能调用一次.
          */
         NvMap extract(String path);
-
-        /**
-         * 在match的时候设置
-         */
-        Route<Handler> setSearchParts(String[] searchParts);
-
-        /**
-         * extract的时候清除
-         */
-        void clearSearchParts();
     }
 }
