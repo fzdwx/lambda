@@ -327,4 +327,12 @@ public interface Seq<T> extends Stream<T> {
     static <T> Seq<? extends T> skip(final Stream<? extends T> stream, final long elements) {
         return of(stream.skip(elements));
     }
+
+    static <T> List<T> sort(List<T> T) {
+        return T.stream().sorted().collect(Collectors.toList());
+    }
+
+    static <T> List<T> sort(List<T> T, Comparator<? super T> comparator) {
+        return T.stream().sorted().collect(Collectors.toList());
+    }
 }
