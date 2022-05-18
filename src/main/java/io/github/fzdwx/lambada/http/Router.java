@@ -1,9 +1,8 @@
 package io.github.fzdwx.lambada.http;
 
-import io.github.fzdwx.lambada.internal.Tuple2;
+import io.github.fzdwx.lambada.anno.Nullable;
 import io.github.fzdwx.lambada.lang.NvMap;
-
-import java.util.Map;
+import org.springframework.web.util.pattern.PathPatternParser;
 
 /**
  * router implementation
@@ -16,6 +15,8 @@ public interface Router<Handler> {
     static <Handler> RouterImpl<Handler> router() {
         return new RouterImpl<>();
     }
+
+    static PathPatternParser PARSER = new PathPatternParser();
 
     /**
      * 添加路由
@@ -39,7 +40,17 @@ public interface Router<Handler> {
      * @param path   路径
      * @return router handler and params map
      */
-    Tuple2<Handler, NvMap> match(final HttpMethod method, final String path);
+    @Nullable
+    Route<Handler> match(final HttpMethod method, final String path);
+
+    /**
+     * @see #match(HttpMethod, String)
+     */
+    default Route<Handler> match(String method, String path) {
+        final HttpMethod httpMethod = HttpMethod.of(method);
+
+        return match(httpMethod, path);
+    }
 
     /**
      * @see #addRoute(HttpMethod, String, Object)
@@ -87,14 +98,29 @@ public interface Router<Handler> {
         return this;
     }
 
-    /**
-     * @see #match(HttpMethod, String)
-     */
-    default Tuple2<Handler, NvMap> match(String method, String path) {
-        final HttpMethod httpMethod = HttpMethod.of(method);
+    interface Route<Handler> {
 
-        return match(httpMethod, path);
+        String pattern();
+
+        Handler handler();
+
+        /**
+         * 提取路径参数
+         * <p>
+         * 只支持 :或*开头的参数
+         *
+         * @apiNote 只能调用一次.
+         */
+        NvMap extract(String path);
+
+        /**
+         * 在match的时候设置
+         */
+        Route<Handler> setSearchParts(String[] searchParts);
+
+        /**
+         * extract的时候清除
+         */
+        void clearSearchParts();
     }
-
-    Map<String, Handler> handlers();
 }
