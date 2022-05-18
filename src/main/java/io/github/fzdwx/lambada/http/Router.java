@@ -2,7 +2,6 @@ package io.github.fzdwx.lambada.http;
 
 import io.github.fzdwx.lambada.anno.Nullable;
 import io.github.fzdwx.lambada.lang.NvMap;
-import org.springframework.web.util.pattern.PathPatternParser;
 
 /**
  * router implementation
@@ -15,8 +14,6 @@ public interface Router<Handler> {
     static <Handler> RouterImpl<Handler> router() {
         return new RouterImpl<>();
     }
-
-    static PathPatternParser PARSER = new PathPatternParser();
 
     /**
      * 添加路由

@@ -141,7 +141,7 @@ public class RouterImpl<Handler> implements Router<Handler> {
             final List<RouteImpl> children = this.matchChildren(part);
 
             for (final RouteImpl child : children) {
-                final RouteImpl routeImpl = child.search(0, parts);
+                final RouteImpl routeImpl = child.search(height + 1, parts);
                 if (routeImpl != null) {
                     return routeImpl;
                 }
