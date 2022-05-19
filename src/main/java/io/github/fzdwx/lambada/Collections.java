@@ -2,6 +2,7 @@ package io.github.fzdwx.lambada;
 
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import com.google.common.collect.Sets;
 import io.github.fzdwx.lambada.anno.NonNull;
 
@@ -738,5 +739,9 @@ public interface Collections {
 
     static <K,V> Map<K,V> emptySortedMap() {
         return java.util.Collections.emptySortedMap();
+    }
+
+    static <T> Collection<T> unmodifiable(Collection<T> coll) {
+        return CollectionUtil.unmodifiable(coll);
     }
 }
