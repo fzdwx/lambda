@@ -302,6 +302,15 @@ public interface Seq<T> extends Stream<T> {
     }
 
     /**
+     * map.
+     *
+     * @apiNote this method is a shortcut for {@code stream.map(mapper)},
+     */
+    static <R, T> Seq<R> map(Collection<T> collection, final Function<? super T, ? extends R> mapper) {
+        return Seq.of(collection.stream().map(mapper));
+    }
+
+    /**
      * Returns a limited interval from a given Stream.
      * <p>
      * <code><pre>
