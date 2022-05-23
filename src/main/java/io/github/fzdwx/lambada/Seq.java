@@ -1,6 +1,7 @@
 package io.github.fzdwx.lambada;
 
 
+import io.github.fzdwx.lambada.anno.NonNull;
 import io.github.fzdwx.lambada.internal.IntStream;
 import io.github.fzdwx.lambada.internal.SeqImpl;
 import io.github.fzdwx.lambada.internal.Tuple2;
@@ -109,7 +110,7 @@ public interface Seq<T> extends Stream<T> {
     }
 
     /**
-     * 强转类型
+     * cast to {@code <U>}
      *
      * @return {@link Seq<U> }
      */
@@ -131,11 +132,20 @@ public interface Seq<T> extends Stream<T> {
         return !this.isEmpty();
     }
 
+    /**
+     * collect to map.
+     *
+     * @apiNote this method is a shortcut for {@code collect(Collectors.toMap(keyMapper, valueMapper))},
+     */
     default <K, V> Map<K, V> toMap(final Function<? super T, ? extends K> keyMapper,
                                    final Function<? super T, ? extends V> valueMapper) {
         return this.collect(Collectors.toMap(keyMapper, valueMapper));
     }
 
+    /**
+     * @apiNote the value is {@code <T> }
+     * @see #toMap(Seq, Function, Function)
+     */
     default <K> Map<K, T> toMap(final Function<? super T, ? extends K> keyMapper) {
         return this.collect(Collectors.toMap(keyMapper, Function.identity()));
     }
@@ -213,6 +223,94 @@ public interface Seq<T> extends Stream<T> {
     }
 
     /**
+     * @apiNote the value is {@code <T> }
+     * @see #toMap(Seq, Function, Function)
+     */
+    static <K, T> Map<K, T> toMap(@NonNull final Collection<T> collection,
+                                  final Function<T, K> keyMapper
+    ) {
+        if (Lang.isEmpty(collection)) {
+            return Collections.map();
+        }
+        return toMap(Seq.of(collection), keyMapper, Function.identity());
+    }
+
+    /**
+     * @apiNote the value is {@code <T> }
+     * @see #toMap(Seq, Function, Function)
+     */
+    static <K, T, V> Map<K, V> toMap(@NonNull final Collection<T> collection,
+                                     final Function<? super T, ? extends K> keyMapper,
+                                     final Function<? super T, ? extends V> valueMapper
+    ) {
+        if (collection == null) {
+            return Collections.map();
+        }
+        return toMap(Seq.of(collection), keyMapper, valueMapper);
+    }
+
+    /**
+     * @apiNote the value is {@code <T> }
+     * @see #toMap(Seq, Function, Function)
+     */
+    static <K, T> Map<K, T> toMap(@NonNull final Stream<T> stream,
+                                  final Function<T, K> keyMapper
+    ) {
+        if (stream == null) {
+            return Collections.map();
+        }
+        return toMap(Seq.of(stream), keyMapper, Function.identity());
+    }
+
+    /**
+     * @apiNote the value is {@code <T> }
+     * @see #toMap(Seq, Function, Function)
+     */
+    static <K, T, V> Map<K, V> toMap(@NonNull final Stream<T> stream,
+                                     final Function<? super T, ? extends K> keyMapper,
+                                     final Function<? super T, ? extends V> valueMapper
+    ) {
+        if (stream == null) {
+            return Collections.map();
+        }
+        return toMap(Seq.of(stream), keyMapper, valueMapper);
+    }
+
+    /**
+     * @apiNote the value is {@code <T> }
+     * @see #toMap(Seq, Function, Function)
+     */
+    static <K, T> Map<K, T> toMap(@NonNull final Seq<T> seq,
+                                  final Function<T, K> keyMapper
+    ) {
+        return seq.toMap(keyMapper);
+    }
+
+    /**
+     * collect to map.
+     *
+     * @apiNote this method is a shortcut for {@code collect(Collectors.toMap(keyMapper, valueMapper))},
+     */
+    static <K, T, V> Map<K, V> toMap(@NonNull final Seq<T> seq,
+                                     final Function<? super T, ? extends K> keyMapper,
+                                     final Function<? super T, ? extends V> valueMapper
+    ) {
+        if (seq == null) {
+            return Collections.map();
+        }
+        return seq.toMap(keyMapper, valueMapper);
+    }
+
+    /**
+     * map.
+     *
+     * @apiNote this method is a shortcut for {@code stream.map(mapper)},
+     */
+    static <R, T> Seq<R> map(Collection<T> collection, final Function<? super T, ? extends R> mapper) {
+        return Seq.of(collection.stream().map(mapper));
+    }
+
+    /**
      * Returns a limited interval from a given Stream.
      * <p>
      * <code><pre>
@@ -237,5 +335,34 @@ public interface Seq<T> extends Stream<T> {
      */
     static <T> Seq<? extends T> skip(final Stream<? extends T> stream, final long elements) {
         return of(stream.skip(elements));
+    }
+
+    /**
+     * @see #sort(Collection, Comparator)
+     */
+    static <T> List<T> sort(@NonNull Stream<T> s) {
+        return s.sorted().collect(Collectors.toList());
+    }
+
+    /**
+     * @see #sort(Collection, Comparator)
+     */
+    static <T> List<T> sort(@NonNull Stream<T> s, Comparator<? super T> comparator) {
+        return s.sorted(comparator).collect(Collectors.toList());
+    }
+
+    /**
+     * @see #sort(Collection, Comparator)
+     */
+    static <T> List<T> sort(Collection<T> list) {
+        return list.stream().sorted().collect(Collectors.toList());
+    }
+
+    /**
+     * @return {@link List }<{@link T }>
+     * @apiNote this method is a shortcut for {@code stream().sorted(comparator).collect(Collectors.toList())},
+     */
+    static <T> List<T> sort(Collection<T> list, Comparator<? super T> comparator) {
+        return list.stream().sorted(comparator).collect(Collectors.toList());
     }
 }

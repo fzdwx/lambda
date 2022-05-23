@@ -1,9 +1,7 @@
 package io.github.fzdwx.lambada.http;
 
-import io.github.fzdwx.lambada.internal.Tuple2;
+import io.github.fzdwx.lambada.anno.Nullable;
 import io.github.fzdwx.lambada.lang.NvMap;
-
-import java.util.Map;
 
 /**
  * router implementation
@@ -13,6 +11,15 @@ import java.util.Map;
  */
 public interface Router<Handler> {
 
+    /**
+     * default impl
+     *
+     * @apiNote support<pre>
+     *     1./hello/:name -> get name
+     *     2./assets/*filepath -> get filepath
+     *     3./assets/{name} -> get name
+     * </pre>
+     */
     static <Handler> RouterImpl<Handler> router() {
         return new RouterImpl<>();
     }
@@ -39,7 +46,17 @@ public interface Router<Handler> {
      * @param path   路径
      * @return router handler and params map
      */
-    Tuple2<Handler, NvMap> match(final HttpMethod method, final String path);
+    @Nullable
+    Route<Handler> match(final HttpMethod method, final String path);
+
+    /**
+     * @see #match(HttpMethod, String)
+     */
+    default Route<Handler> match(String method, String path) {
+        final HttpMethod httpMethod = HttpMethod.of(method);
+
+        return match(httpMethod, path);
+    }
 
     /**
      * @see #addRoute(HttpMethod, String, Object)
@@ -87,14 +104,15 @@ public interface Router<Handler> {
         return this;
     }
 
-    /**
-     * @see #match(HttpMethod, String)
-     */
-    default Tuple2<Handler, NvMap> match(String method, String path) {
-        final HttpMethod httpMethod = HttpMethod.of(method);
+    interface Route<Handler> {
 
-        return match(httpMethod, path);
+        String pattern();
+
+        Handler handler();
+
+        /**
+         * extract path parameters.
+         */
+        NvMap extract(final String path);
     }
-
-    Map<String, Handler> handlers();
 }

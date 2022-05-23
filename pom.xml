@@ -6,7 +6,7 @@
 
     <groupId>io.github.fzdwx</groupId>
     <artifactId>lambda</artifactId>
-    <version>0.10.4-dev</version>
+    <version>0.10.4</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -20,6 +20,7 @@
         <lombok.version>1.18.22</lombok.version>
         <hutool.version>5.8.0</hutool.version>
         <jline.version>3.21.0</jline.version>
+        <spring-core.version>5.3.19</spring-core.version>
     </properties>
 
     <dependencyManagement>
@@ -28,6 +29,11 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring-core.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -82,6 +88,11 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>commons-collections</groupId>

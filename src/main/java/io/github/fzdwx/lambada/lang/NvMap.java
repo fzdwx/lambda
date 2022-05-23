@@ -1,6 +1,7 @@
 package io.github.fzdwx.lambada.lang;
 
 import io.github.fzdwx.lambada.Lang;
+import org.springframework.util.LinkedCaseInsensitiveMap;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,8 +12,7 @@ import java.util.Map;
  * <p>
  * 用于：参数解析，Header，Param 处理
  *
- * @author noear
- * @since 0.06
+ * @see LinkedCaseInsensitiveMap
  */
 public class NvMap extends LinkedCaseInsensitiveMap<String> {
 
@@ -24,7 +24,7 @@ public class NvMap extends LinkedCaseInsensitiveMap<String> {
         super();
     }
 
-    public NvMap(Map map) {
+    public NvMap(Map<?, ?> map) {
         super();
 
         if (map != null) {
@@ -84,7 +84,7 @@ public class NvMap extends LinkedCaseInsensitiveMap<String> {
     }
 
     public long getLong(String key) {
-        return getLong(key, 0l);
+        return getLong(key, 0L);
     }
 
     public long getLong(String key, long def) {

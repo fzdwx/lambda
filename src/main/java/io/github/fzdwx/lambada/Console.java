@@ -25,7 +25,7 @@ public interface Console {
         banner += "   / __/___  ____/ /      __" + Console.ANSI_CYAN + "_  __" + Console.ANSI_RESET + "\n";
         banner += "  / /_/_  / /" + Console.ANSI_RED + " __" + Console.ANSI_RESET + "  / | /| / " + Console.ANSI_CYAN + "/ |/_/" + Console.ANSI_RESET + "\n";
         banner += " / __/ / /_/ " + Console.ANSI_RED + "/_/" + Console.ANSI_RESET + " /| |/ |/ /" + Console.ANSI_CYAN + ">  <  " + Console.ANSI_RESET + "\n";
-        banner += "/_/   /___/\\__,_/ |__/|__" + Console.ANSI_CYAN + "/_/|_|  " + Console.ANSI_RESET + " ::https://github.com/fzdwx:: " + "\n";
+        banner += "/_/   /___/\\__,_/ |__/|__" + Console.ANSI_CYAN + "/_/|_|  " + Console.ANSI_RESET + " ::https://github.com/fzdwx/sky:: " + "\n";
 
         return banner;
     }

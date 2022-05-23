@@ -2,21 +2,24 @@ package io.github.fzdwx.lambada;
 
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import com.google.common.collect.Sets;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import io.github.fzdwx.lambada.anno.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableSet;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -31,7 +34,7 @@ import java.util.stream.Stream;
  * @date 2022/2/25 13:10
  * @since 0.01
  */
-public interface Coll {
+public interface Collections {
 
     static <E> List<E> list() {
         return new ArrayList<E>();
@@ -383,7 +386,7 @@ public interface Coll {
     @SafeVarargs
     static <E> Set<E> linkedSet(final E... elements) {
         final LinkedHashSet<E> set = new LinkedHashSet<>(elements.length);
-        final boolean b = Collections.addAll(set, elements);
+        final boolean b = java.util.Collections.addAll(set, elements);
         return set;
     }
 
@@ -708,5 +711,37 @@ public interface Coll {
             m2.putAll(m1);
             return m2;
         }
+    }
+
+    static <T> List<T> emptyList() {
+        return java.util.Collections.emptyList();
+    }
+
+    static <T> Iterator<T> emptyIterator() {
+        return java.util.Collections.emptyIterator();
+    }
+
+    static <T> Set<T> emptySet() {
+        return java.util.Collections.emptySet();
+    }
+
+    static <T> SortedSet<T> emptySortedSet() {
+        return java.util.Collections.emptySortedSet();
+    }
+
+    static <T> NavigableSet<T> emptyNavigableSet() {
+        return java.util.Collections.emptyNavigableSet();
+    }
+
+    static <K,V> Map<K,V> emptyMap() {
+        return java.util.Collections.emptyMap();
+    }
+
+    static <K,V> Map<K,V> emptySortedMap() {
+        return java.util.Collections.emptySortedMap();
+    }
+
+    static <T> Collection<T> unmodifiable(Collection<T> coll) {
+        return CollectionUtil.unmodifiable(coll);
     }
 }
