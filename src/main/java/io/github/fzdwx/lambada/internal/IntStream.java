@@ -36,6 +36,12 @@ public class IntStream implements java.util.stream.IntStream {
         return new IntStream(java.util.stream.IntStream.range(startInclusive, endExclusive));
     }
 
+    public void forEach(final Runnable action) {
+        this.stream.forEach(i -> {
+            action.run();
+        });
+    }
+
     @Override
     public IntStream filter(final IntPredicate predicate) {
         this.stream = stream.filter(predicate);

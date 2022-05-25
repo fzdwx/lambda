@@ -40,6 +40,13 @@ public class SeqImpl<T> implements Seq<T> {
     }
 
     @Override
+    public void forEach(final Runnable action) {
+        this.stream.forEach(i -> {
+            action.run();
+        });
+    }
+
+    @Override
     public Seq<T> filter(final Predicate<? super T> predicate) {
         this.stream = this.stream.filter(predicate);
         return this;

@@ -31,6 +31,12 @@ public class DoubleStream implements java.util.stream.DoubleStream {
 
     private java.util.stream.DoubleStream stream;
 
+    public void forEach(final Runnable action) {
+        this.stream.forEach(i -> {
+            action.run();
+        });
+    }
+
     @Override
     public DoubleStream filter(final DoublePredicate predicate) {
         this.stream = stream.filter(predicate);
