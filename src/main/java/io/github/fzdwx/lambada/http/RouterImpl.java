@@ -63,7 +63,7 @@ public class RouterImpl<Handler> implements Router<Handler> {
         return routes.get(method).search(0, searchParts);
     }
 
-    public class RouteImpl implements Router.Route<Handler> {
+    public class RouteImpl implements Route<Handler> {
 
         /**
          * 路由
