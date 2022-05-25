@@ -51,38 +51,8 @@ public class SeqImpl<T> implements Seq<T> {
     }
 
     @Override
-    public IntStream mapToInt(final ToIntFunction<? super T> mapper) {
-        return this.stream.mapToInt(mapper);
-    }
-
-    @Override
-    public LongStream mapToLong(final ToLongFunction<? super T> mapper) {
-        return this.stream.mapToLong(mapper);
-    }
-
-    @Override
-    public DoubleStream mapToDouble(final ToDoubleFunction<? super T> mapper) {
-        return this.stream.mapToDouble(mapper);
-    }
-
-    @Override
     public <R> Seq<R> flatMap(final Function<? super T, ? extends Stream<? extends R>> mapper) {
         return new SeqImpl<>(this.stream.flatMap(mapper));
-    }
-
-    @Override
-    public IntStream flatMapToInt(final Function<? super T, ? extends IntStream> mapper) {
-        return this.stream.flatMapToInt(mapper);
-    }
-
-    @Override
-    public LongStream flatMapToLong(final Function<? super T, ? extends LongStream> mapper) {
-        return this.stream.flatMapToLong(mapper);
-    }
-
-    @Override
-    public DoubleStream flatMapToDouble(final Function<? super T, ? extends DoubleStream> mapper) {
-        return this.stream.flatMapToDouble(mapper);
     }
 
     @Override
@@ -119,6 +89,90 @@ public class SeqImpl<T> implements Seq<T> {
     public Seq<T> skip(final long n) {
         this.stream = this.stream.skip(n);
         return this;
+    }
+
+    @Override
+    public List<T> toList() {
+        // return SharedSecrets.getJavaUtilCollectionAccess().listFromTrustedArrayNullsAllowed(this.toArray());
+        return this.stream.collect(Collectors.toList());
+    }
+
+    @Override
+    public Seq<T> sequential() {
+        this.stream = this.stream.sequential();
+        return this;
+    }
+
+    @Override
+    public Seq<T> parallel() {
+        this.stream = this.stream.parallel();
+        return this;
+    }
+
+    @Override
+    public Seq<T> unordered() {
+        this.stream = this.stream.unordered();
+        return this;
+    }
+
+    @Override
+    public Seq<T> onClose(final Runnable closeHandler) {
+        this.stream = this.stream.onClose(closeHandler);
+        return this;
+    }
+
+    @Override
+    public Seq<T> concat(final Stream<? extends T> other) {
+        this.stream = Stream.concat(this.stream, other);
+        return this;
+    }
+
+    @Override
+    public Seq<T> concat(final T other) {
+        this.stream = Stream.concat(this.stream, Stream.of(other));
+        return this;
+    }
+
+    @SafeVarargs
+    @Override
+    public final Seq<T> concat(final T... other) {
+        this.stream = Stream.concat(this.stream, Stream.of(other));
+        return this;
+    }
+
+    @Override
+    public Set<T> toSet() {
+        return this.stream.collect(Collectors.toSet());
+    }
+
+    @Override
+    public IntStream mapToInt(final ToIntFunction<? super T> mapper) {
+        return this.stream.mapToInt(mapper);
+    }
+
+    @Override
+    public LongStream mapToLong(final ToLongFunction<? super T> mapper) {
+        return this.stream.mapToLong(mapper);
+    }
+
+    @Override
+    public DoubleStream mapToDouble(final ToDoubleFunction<? super T> mapper) {
+        return this.stream.mapToDouble(mapper);
+    }
+
+    @Override
+    public IntStream flatMapToInt(final Function<? super T, ? extends IntStream> mapper) {
+        return this.stream.flatMapToInt(mapper);
+    }
+
+    @Override
+    public LongStream flatMapToLong(final Function<? super T, ? extends LongStream> mapper) {
+        return this.stream.flatMapToLong(mapper);
+    }
+
+    @Override
+    public DoubleStream flatMapToDouble(final Function<? super T, ? extends DoubleStream> mapper) {
+        return this.stream.flatMapToDouble(mapper);
     }
 
     @Override
@@ -222,61 +276,8 @@ public class SeqImpl<T> implements Seq<T> {
     }
 
     @Override
-    public Seq<T> sequential() {
-        this.stream = this.stream.sequential();
-        return this;
-    }
-
-    @Override
-    public Seq<T> parallel() {
-        this.stream = this.stream.parallel();
-        return this;
-    }
-
-    @Override
-    public Seq<T> unordered() {
-        this.stream = this.stream.unordered();
-        return this;
-    }
-
-    @Override
-    public Seq<T> onClose(final Runnable closeHandler) {
-        this.stream = this.stream.onClose(closeHandler);
-        return this;
-    }
-
-    @Override
     public void close() {
         this.stream.close();
-    }
-
-    @Override
-    public Seq<T> concat(final Stream<? extends T> other) {
-        this.stream = Stream.concat(this.stream, other);
-        return this;
-    }
-
-    @Override
-    public Seq<T> concat(final T other) {
-        this.stream = Stream.concat(this.stream, Stream.of(other));
-        return this;
-    }
-
-    @SafeVarargs
-    @Override
-    public final Seq<T> concat(final T... other) {
-        this.stream = Stream.concat(this.stream, Stream.of(other));
-        return this;
-    }
-
-    @Override
-    public Set<T> toSet() {
-        return this.stream.collect(Collectors.toSet());
-    }
-
-    @Override
-    public List<T> toList() {
-        return this.stream.collect(Collectors.toList());
     }
 
     @Override
