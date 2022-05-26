@@ -20,7 +20,7 @@
         <lombok.version>1.18.22</lombok.version>
         <hutool.version>5.8.0</hutool.version>
         <jline.version>3.21.0</jline.version>
-        <spring-core.version>5.3.19</spring-core.version>
+        <spring-core.version>5.3.20</spring-core.version>
     </properties>
 
     <dependencyManagement>
