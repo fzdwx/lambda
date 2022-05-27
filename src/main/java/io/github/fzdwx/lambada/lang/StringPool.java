@@ -12,6 +12,8 @@ public interface StringPool {
 
     String SLASH = "/";
 
+    String CONCAT = "-";
+
     String DOUBLE_SLASH = "//";
 
     char SLASH_CHAR = '/';
