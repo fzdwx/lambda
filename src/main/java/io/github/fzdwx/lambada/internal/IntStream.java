@@ -36,6 +36,12 @@ public class IntStream implements java.util.stream.IntStream {
         return new IntStream(java.util.stream.IntStream.range(startInclusive, endExclusive));
     }
 
+    public void forEach(final Runnable action) {
+        this.stream.forEach(i -> {
+            action.run();
+        });
+    }
+
     @Override
     public IntStream filter(final IntPredicate predicate) {
         this.stream = stream.filter(predicate);
@@ -102,10 +108,6 @@ public class IntStream implements java.util.stream.IntStream {
     @Override
     public void forEach(final IntConsumer action) {
         this.stream.forEach(action);
-    }
-
-    public void println() {
-        this.stream.forEach(System.out::println);
     }
 
     @Override
@@ -216,6 +218,25 @@ public class IntStream implements java.util.stream.IntStream {
     }
 
     @Override
+    public PrimitiveIterator.OfInt iterator() {
+        return this.stream.iterator();
+    }
+
+    @Override
+    public Spliterator.OfInt spliterator() {
+        return this.stream.spliterator();
+    }
+
+    public void println() {
+        this.stream.forEach(System.out::println);
+    }
+
+    @Override
+    public boolean isParallel() {
+        return stream.isParallel();
+    }
+
+    @Override
     public IntStream unordered() {
         this.stream = stream.unordered();
         return this;
@@ -230,20 +251,5 @@ public class IntStream implements java.util.stream.IntStream {
     @Override
     public void close() {
         this.stream.close();
-    }
-
-    @Override
-    public PrimitiveIterator.OfInt iterator() {
-        return this.stream.iterator();
-    }
-
-    @Override
-    public Spliterator.OfInt spliterator() {
-        return this.stream.spliterator();
-    }
-
-    @Override
-    public boolean isParallel() {
-        return stream.isParallel();
     }
 }

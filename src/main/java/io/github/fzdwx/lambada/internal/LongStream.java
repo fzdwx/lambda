@@ -31,6 +31,12 @@ public class LongStream implements java.util.stream.LongStream {
 
     private java.util.stream.LongStream stream;
 
+    public void forEach(final Runnable action) {
+        this.stream.forEach(i -> {
+            action.run();
+        });
+    }
+
     @Override
     public LongStream filter(final LongPredicate predicate) {
         this.stream = stream.filter(predicate);

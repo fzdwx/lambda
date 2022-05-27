@@ -1,7 +1,6 @@
 package io.github.fzdwx.lambada.http;
 
 import io.github.fzdwx.lambada.anno.Nullable;
-import io.github.fzdwx.lambada.lang.NvMap;
 
 /**
  * router implementation
@@ -102,17 +101,5 @@ public interface Router<Handler> {
     default Router<Handler> DELETE(String pattern, Handler handler) {
         addRoute(HttpMethod.DELETE, pattern, handler);
         return this;
-    }
-
-    interface Route<Handler> {
-
-        String pattern();
-
-        Handler handler();
-
-        /**
-         * extract path parameters.
-         */
-        NvMap extract(final String path);
     }
 }

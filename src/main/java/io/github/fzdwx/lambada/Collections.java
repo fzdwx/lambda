@@ -21,6 +21,7 @@ import java.util.NavigableSet;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -128,6 +129,12 @@ public interface Collections {
         return list;
     }
 
+    static <E> List<E> list(Consumer<List<E>> init) {
+        final List<E> list = new ArrayList<>();
+        init.accept(list);
+        return list;
+    }
+
     static <E> LinkedList<E> linkedList() {
         return new LinkedList<>();
     }
@@ -211,6 +218,12 @@ public interface Collections {
     @SafeVarargs
     static <E> LinkedList<E> linkedList(final E... element) {
         return new LinkedList<>(Arrays.asList(element));
+    }
+
+    static <E> LinkedList<E> linkedList(Consumer<LinkedList<E>> init) {
+        final LinkedList<E> list = new LinkedList<>();
+        init.accept(list);
+        return list;
     }
 
     static <E> Set<E> set() {
@@ -303,6 +316,12 @@ public interface Collections {
         return Sets.newHashSet(elements);
     }
 
+    static <E> Set<E> set(Consumer<Set<E>> init) {
+        final Set<E> list = new HashSet<>();
+        init.accept(list);
+        return list;
+    }
+
     static <E> Set<E> linkedSet() {
         return new LinkedHashSet<>();
     }
@@ -390,6 +409,12 @@ public interface Collections {
         return set;
     }
 
+    static <E> Set<E> linkedSet(Consumer<LinkedHashSet<E>> init) {
+        final LinkedHashSet<E> list = new LinkedHashSet<>();
+        init.accept(list);
+        return list;
+    }
+
     static <K, V> Map<K, V> map() {
         return new HashMap<>();
     }
@@ -414,20 +439,20 @@ public interface Collections {
 
 
     static <K, V> Map<K, V> map(final K key, final V val) {
-        final Map<K, V> map = new HashMap<>(1);
+        final Map<K, V> map = new HashMap<>(16);
         map.put(key, val);
         return map;
     }
 
     static <K, V> Map<K, V> map(final K k1, final V v1, final K k2, final V v2) {
-        final Map<K, V> map = new HashMap<>(2);
+        final Map<K, V> map = new HashMap<>(16);
         map.put(k1, v1);
         map.put(k2, v2);
         return map;
     }
 
     static <K, V> Map<K, V> map(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3) {
-        final Map<K, V> map = new HashMap<>(3);
+        final Map<K, V> map = new HashMap<>(16);
         map.put(k1, v1);
         map.put(k2, v2);
         map.put(k3, v3);
@@ -435,7 +460,7 @@ public interface Collections {
     }
 
     static <K, V> Map<K, V> map(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4) {
-        final Map<K, V> map = new HashMap<>(4);
+        final Map<K, V> map = new HashMap<>(16);
         map.put(k1, v1);
         map.put(k2, v2);
         map.put(k3, v3);
@@ -445,7 +470,7 @@ public interface Collections {
 
     static <K, V> Map<K, V> map(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
                                 final V v5) {
-        final Map<K, V> map = new HashMap<>(5);
+        final Map<K, V> map = new HashMap<>(16);
         map.put(k1, v1);
         map.put(k2, v2);
         map.put(k3, v3);
@@ -456,7 +481,7 @@ public interface Collections {
 
     static <K, V> Map<K, V> map(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
                                 final V v5, final K k6, final V v6) {
-        final Map<K, V> map = new HashMap<>(6);
+        final Map<K, V> map = new HashMap<>(16);
         map.put(k1, v1);
         map.put(k2, v2);
         map.put(k3, v3);
@@ -468,50 +493,66 @@ public interface Collections {
 
     static <K, V> Map<K, V> map(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
                                 final V v5, final K k6, final V v6, final K k7, final V v7) {
-        final Map<K, V> map = new HashMap<>(6);
+        final Map<K, V> map = new HashMap<>(16);
         map.put(k1, v1);
         map.put(k2, v2);
         map.put(k3, v3);
         map.put(k4, v4);
         map.put(k5, v5);
         map.put(k6, v6);
+        map.put(k7, v7);
         return map;
     }
 
     static <K, V> Map<K, V> map(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
                                 final V v5, final K k6, final V v6, final K k7, final V v7, final K k8, final V v8) {
-        final Map<K, V> map = new HashMap<>(6);
+        final Map<K, V> map = new HashMap<>(16);
         map.put(k1, v1);
         map.put(k2, v2);
         map.put(k3, v3);
         map.put(k4, v4);
         map.put(k5, v5);
         map.put(k6, v6);
+        map.put(k7, v7);
+        map.put(k8, v8);
         return map;
     }
 
     static <K, V> Map<K, V> map(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
                                 final V v5, final K k6, final V v6, final K k7, final V v7, final K k8, final V v8, final K k9, final V v9) {
-        final Map<K, V> map = new HashMap<>(6);
+        final Map<K, V> map = new HashMap<>(16);
         map.put(k1, v1);
         map.put(k2, v2);
         map.put(k3, v3);
         map.put(k4, v4);
         map.put(k5, v5);
         map.put(k6, v6);
+        map.put(k7, v7);
+        map.put(k8, v8);
+        map.put(k9, v9);
         return map;
     }
 
     static <K, V> Map<K, V> map(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
                                 final V v5, final K k6, final V v6, final K k7, final V v7, final K k8, final V v8, final K k9, final V v9,
                                 final K k10, final V v10) {
-        final Map<K, V> map = new HashMap<>(6);
+        final Map<K, V> map = new HashMap<>(16);
         map.put(k1, v1);
         map.put(k2, v2);
         map.put(k3, v3);
         map.put(k4, v4);
         map.put(k5, v5);
         map.put(k6, v6);
+        map.put(k7, v7);
+        map.put(k8, v8);
+        map.put(k9, v9);
+        map.put(k10, v10);
+        return map;
+    }
+
+    static <K, V> Map<K, V> map(Consumer<Map<K, V>> init) {
+        final Map<K, V> map = new HashMap<>(16);
+        init.accept(map);
         return map;
     }
 
@@ -526,7 +567,6 @@ public interface Collections {
         }
         return map;
     }
-
 
     static <K, V> Map<K, V> linkedMap(final K key, final V val) {
         final Map<K, V> map = new LinkedHashMap<>(1);
@@ -559,7 +599,7 @@ public interface Collections {
     }
 
     static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
-                                final V v5) {
+                                      final V v5) {
         final Map<K, V> map = new LinkedHashMap<>(5);
         map.put(k1, v1);
         map.put(k2, v2);
@@ -570,7 +610,7 @@ public interface Collections {
     }
 
     static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
-                                final V v5, final K k6, final V v6) {
+                                      final V v5, final K k6, final V v6) {
         final Map<K, V> map = new LinkedHashMap<>(6);
         map.put(k1, v1);
         map.put(k2, v2);
@@ -582,7 +622,7 @@ public interface Collections {
     }
 
     static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
-                                final V v5, final K k6, final V v6, final K k7, final V v7) {
+                                      final V v5, final K k6, final V v6, final K k7, final V v7) {
         final Map<K, V> map = new LinkedHashMap<>(6);
         map.put(k1, v1);
         map.put(k2, v2);
@@ -590,11 +630,12 @@ public interface Collections {
         map.put(k4, v4);
         map.put(k5, v5);
         map.put(k6, v6);
+        map.put(k7, v7);
         return map;
     }
 
     static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
-                                final V v5, final K k6, final V v6, final K k7, final V v7, final K k8, final V v8) {
+                                      final V v5, final K k6, final V v6, final K k7, final V v7, final K k8, final V v8) {
         final Map<K, V> map = new LinkedHashMap<>(6);
         map.put(k1, v1);
         map.put(k2, v2);
@@ -602,11 +643,13 @@ public interface Collections {
         map.put(k4, v4);
         map.put(k5, v5);
         map.put(k6, v6);
+        map.put(k7, v7);
+        map.put(k8, v8);
         return map;
     }
 
     static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
-                                final V v5, final K k6, final V v6, final K k7, final V v7, final K k8, final V v8, final K k9, final V v9) {
+                                      final V v5, final K k6, final V v6, final K k7, final V v7, final K k8, final V v8, final K k9, final V v9) {
         final Map<K, V> map = new LinkedHashMap<>(6);
         map.put(k1, v1);
         map.put(k2, v2);
@@ -614,12 +657,15 @@ public interface Collections {
         map.put(k4, v4);
         map.put(k5, v5);
         map.put(k6, v6);
+        map.put(k7, v7);
+        map.put(k8, v8);
+        map.put(k9, v9);
         return map;
     }
 
     static <K, V> Map<K, V> linkedMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
-                                final V v5, final K k6, final V v6, final K k7, final V v7, final K k8, final V v8, final K k9, final V v9,
-                                final K k10, final V v10) {
+                                      final V v5, final K k6, final V v6, final K k7, final V v7, final K k8, final V v8, final K k9, final V v9,
+                                      final K k10, final V v10) {
         final Map<K, V> map = new LinkedHashMap<>(6);
         map.put(k1, v1);
         map.put(k2, v2);
@@ -627,9 +673,18 @@ public interface Collections {
         map.put(k4, v4);
         map.put(k5, v5);
         map.put(k6, v6);
+        map.put(k7, v7);
+        map.put(k8, v8);
+        map.put(k9, v9);
+        map.put(k10, v10);
         return map;
     }
 
+    static <K, V> Map<K, V> linkedMap(Consumer<Map<K, V>> init) {
+        final Map<K, V> map = new LinkedHashMap<>(16);
+        init.accept(map);
+        return map;
+    }
 
     static <K, V> Map<K, V> cMap() {
         return new ConcurrentHashMap<>();
@@ -676,15 +731,22 @@ public interface Collections {
         return map;
     }
 
-    static <K, V> Map<K, V> cMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4, final K k5,
-                                 final V v5, final K k6, final V v6) {
-        final Map<K, V> map = new ConcurrentHashMap<>(6);
+    static <K, V> ConcurrentHashMap<K, V> cMap(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3, final K k4, final V v4,
+                                               final K k5,
+                                               final V v5, final K k6, final V v6) {
+        final ConcurrentHashMap<K, V> map = new ConcurrentHashMap<>(6);
         map.put(k1, v1);
         map.put(k2, v2);
         map.put(k3, v3);
         map.put(k4, v4);
         map.put(k5, v5);
         map.put(k6, v6);
+        return map;
+    }
+
+    static <K, V> ConcurrentHashMap<K, V> cMap(Consumer<Map<K, V>> init) {
+        final ConcurrentHashMap<K, V> map = new ConcurrentHashMap<>(16);
+        init.accept(map);
         return map;
     }
 
@@ -713,6 +775,14 @@ public interface Collections {
         }
     }
 
+    static <T> List<T> singleList(T t) {
+        return list(t);
+    }
+
+    static <T> Set<T> singleSet(T t) {
+        return set(t);
+    }
+
     static <T> List<T> emptyList() {
         return java.util.Collections.emptyList();
     }
@@ -733,11 +803,11 @@ public interface Collections {
         return java.util.Collections.emptyNavigableSet();
     }
 
-    static <K,V> Map<K,V> emptyMap() {
+    static <K, V> Map<K, V> emptyMap() {
         return java.util.Collections.emptyMap();
     }
 
-    static <K,V> Map<K,V> emptySortedMap() {
+    static <K, V> Map<K, V> emptySortedMap() {
         return java.util.Collections.emptySortedMap();
     }
 

@@ -78,6 +78,11 @@ public interface Seq<T> extends Stream<T> {
     }
 
     /**
+     * just foreach
+     */
+    void forEach(final Runnable action);
+
+    /**
      * Returns a limited interval from a given Stream.
      * <p>
      * <code><pre>
@@ -219,7 +224,7 @@ public interface Seq<T> extends Stream<T> {
     Set<T> toSet();
 
     default void println() {
-        this.forEach(System.out::println);
+        this.forEach(v -> System.out.println(v));
     }
 
     /**
