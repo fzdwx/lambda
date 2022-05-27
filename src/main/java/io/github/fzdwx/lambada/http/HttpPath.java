@@ -21,13 +21,22 @@ public interface HttpPath {
     static String format(String path) {
         if (path == null || path.equals(StringPool.SLASH)) {
             path = Lang.EMPTY_STR;
-        } else if (path.isEmpty() || path.startsWith(StringPool.SLASH)) {
-        } else {
+        }
+
+        while (path.startsWith(StringPool.DOUBLE_SLASH)) {
+            path = path.substring(1);
+        }
+
+        if (!path.startsWith(StringPool.SLASH)) {
             path = StringPool.SLASH + path;
         }
-        if (path.endsWith(StringPool.SLASH)) {
-            return path.substring(0, path.length() - 1);
+
+        if(path.length() > 1) {
+            while (path.endsWith(StringPool.SLASH)) {
+                path = path.substring(0, path.length() - 1);
+            }
         }
+
         return path;
     }
 }

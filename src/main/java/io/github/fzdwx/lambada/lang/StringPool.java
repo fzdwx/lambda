@@ -12,6 +12,8 @@ public interface StringPool {
 
     String SLASH = "/";
 
+    String DOUBLE_SLASH = "//";
+
     char SLASH_CHAR = '/';
 
     String WINDOWS_FOLDER_SEPARATOR = "\\";
