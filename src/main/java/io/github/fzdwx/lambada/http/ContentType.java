@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * http content type
  *
- * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
+ * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/05/07 18:02:55
  */
 public enum ContentType {
