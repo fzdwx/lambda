@@ -1,6 +1,6 @@
 package io.github.fzdwx.lambada.http;
 
-import io.github.fzdwx.lambada.lang.NvMap;
+import io.github.fzdwx.lambada.lang.KvMap;
 
 public interface Route<Handler> {
 
@@ -11,5 +11,5 @@ public interface Route<Handler> {
     /**
      * extract path parameters.
      */
-    NvMap extract(final String path);
+    KvMap extract(final String path);
 }

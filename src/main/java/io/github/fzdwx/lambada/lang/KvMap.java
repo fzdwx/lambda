@@ -8,23 +8,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 可排序，不区分大小写（Name value map）
- * <p>
- * 用于：参数解析，Header，Param 处理
- *
  * @see LinkedCaseInsensitiveMap
  */
-public class NvMap extends LinkedCaseInsensitiveMap<String> {
+public class KvMap extends LinkedCaseInsensitiveMap<String> {
 
-    public static NvMap create() {
-        return new NvMap();
+    public static KvMap create() {
+        return new KvMap();
     }
 
-    public NvMap() {
+    public KvMap() {
         super();
     }
 
-    public NvMap(Map<?, ?> map) {
+    public KvMap(Map<?, ?> map) {
         super();
 
         if (map != null) {
@@ -36,17 +32,17 @@ public class NvMap extends LinkedCaseInsensitiveMap<String> {
         }
     }
 
-    public NvMap set(String key, String val) {
+    public KvMap set(String key, String val) {
         put(key, val);
         return this;
     }
 
-    public static NvMap from(String[] args) {
+    public static KvMap from(String[] args) {
         return from(Arrays.asList(args));
     }
 
-    public static NvMap from(List<String> args) {
-        NvMap d = new NvMap();
+    public static KvMap from(List<String> args) {
+        KvMap d = new KvMap();
 
         if (args != null) {
             for (String arg : args) {
@@ -63,7 +59,7 @@ public class NvMap extends LinkedCaseInsensitiveMap<String> {
         return d;
     }
 
-    public NvMap add(final String key, final Iterable<String> value) {
+    public KvMap add(final String key, final Iterable<String> value) {
         for (final String s : value) {
             this.put(key, s);
         }
