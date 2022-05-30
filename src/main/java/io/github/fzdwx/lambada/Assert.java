@@ -22,4 +22,10 @@ public class Assert {
         }
         return t;
     }
+
+    public static void gt0(final int chunkSize, final String message) {
+        if (chunkSize <= 0) {
+            Exceptions.illegalArgument(message);
+        }
+    }
 }

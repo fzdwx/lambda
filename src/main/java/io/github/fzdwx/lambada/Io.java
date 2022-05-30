@@ -6,6 +6,7 @@ import io.github.fzdwx.lambada.lang.StringPool;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -210,6 +211,21 @@ public interface Io {
     static RandomAccessFile newRaf(String filePath) {
         try {
             return new RandomAccessFile(filePath, "r");
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    static File newFile(String filePath) {
+        return new File(filePath);
+    }
+
+    /**
+     * file to randomAccessFile. when File not found, then return null.
+     */
+    static RandomAccessFile toRaf(File file) {
+        try {
+            return new RandomAccessFile(file, "r");
         } catch (Exception e) {
             return null;
         }

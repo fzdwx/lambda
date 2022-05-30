@@ -43,4 +43,15 @@ public enum HttpMethod {
         return name().equals(method.toUpperCase(Locale.ROOT));
     }
 
+    /**
+     * Determine whether this {@link HttpMethod} matches the given method value.
+     *
+     * @param method the HTTP method as a String
+     * @return {@code true} if it matches, {@code false} otherwise
+     */
+    public boolean matches(HttpMethod method) {
+        if (method == null) return false;
+        return this == method;
+    }
+
 }
