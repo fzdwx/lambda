@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.time.Duration;
 
 /**
- * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
+ * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/5/14 17:31
  */
 class ConsoleTest {

@@ -6,7 +6,7 @@ import io.github.fzdwx.lambada.Collections;
 import io.github.fzdwx.lambada.Lang;
 import io.github.fzdwx.lambada.anno.NonNull;
 import io.github.fzdwx.lambada.anno.Nullable;
-import io.github.fzdwx.lambada.lang.NvMap;
+import io.github.fzdwx.lambada.lang.KvMap;
 
 import java.util.List;
 import java.util.Map;
@@ -204,11 +204,11 @@ public class RouterImpl<Handler> implements Router<Handler> {
         }
 
         @Override
-        public NvMap extract(final String path) {
-            final NvMap nvMap = NvMap.create();
+        public KvMap extract(final String path) {
+            final KvMap kvMap = KvMap.create();
 
             if (path == null) {
-                return nvMap;
+                return kvMap;
             }
 
             final String[] searchParts = toParts(path);
@@ -217,19 +217,19 @@ public class RouterImpl<Handler> implements Router<Handler> {
             for (int i = 0; i < parts.length; i++) {
                 final String part = parts[i];
                 if (part.charAt(0) == ':') {
-                    nvMap.put(part.substring(1), searchParts[i]);
+                    kvMap.put(part.substring(1), searchParts[i]);
                 }
 
                 if (part.charAt(0) == '*' && part.length() > 1) {
-                    nvMap.put(part.substring(1), ArrayUtil.join(ArrayUtil.sub(searchParts, i, searchParts.length), "/"));
+                    kvMap.put(part.substring(1), ArrayUtil.join(ArrayUtil.sub(searchParts, i, searchParts.length), "/"));
                     break;
                 }
 
                 if (springType(part)) {
-                    nvMap.put(part.substring(1, part.length() - 1), searchParts[i]);
+                    kvMap.put(part.substring(1, part.length() - 1), searchParts[i]);
                 }
             }
-            return nvMap;
+            return kvMap;
         }
 
         private boolean isEmpty() {

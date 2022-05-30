@@ -6,11 +6,13 @@ import io.github.fzdwx.lambada.lang.StringPool;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.nio.charset.Charset;
@@ -197,5 +199,35 @@ public interface Io {
         }
 
         return str.substring(fromIndexInclude, toIndexExclude);
+    }
+
+    /**
+     * new randomAccessFile. when File not found, then return null.
+     *
+     * @param filePath filePath
+     * @return {@link RandomAccessFile }
+     */
+    @Nullable
+    static RandomAccessFile newRaf(String filePath) {
+        try {
+            return new RandomAccessFile(filePath, "r");
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    static File newFile(String filePath) {
+        return new File(filePath);
+    }
+
+    /**
+     * file to randomAccessFile. when File not found, then return null.
+     */
+    static RandomAccessFile toRaf(File file) {
+        try {
+            return new RandomAccessFile(file, "r");
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

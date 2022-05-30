@@ -1,20 +1,13 @@
 package io.github.fzdwx.lambada.http;
 
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONUtil;
-import io.github.fzdwx.lambada.Lang;
-import io.github.fzdwx.lambada.Seq;
 import io.github.fzdwx.lambada.anno.Nullable;
 
 import java.nio.charset.Charset;
-import java.util.List;
-import java.util.Map;
 
 /**
  * http content type
  *
- * @author <a href="mailto:likelovec@gmail.com">韦朕</a>
+ * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/05/07 18:02:55
  */
 public enum ContentType {
@@ -245,6 +238,10 @@ public enum ContentType {
         return value + "; charset=" + charset.name();
     }
 
+    public static String addUtf8(String contentType) {
+        return contentType + charset.UTF_8;
+    }
+
     /**
      * 如果 MIME 类型未知，则返回null
      */
@@ -267,18 +264,7 @@ public enum ContentType {
     @Nullable
     public static String parse(String ext) {
         if (ext == null || ext.isEmpty()) return null;
-        return Parse.m.get(ext);
-    }
-
-    static class Parse {
-
-        static Map<String, String> m;
-
-        static {
-            final String s = FileUtil.readString("mime.json", Lang.CHARSET);
-            final List<JSONArray> list = JSONUtil.toBean(s, List.class);
-            m = Seq.toMap(list, o1 -> o1.getStr(0), o2 -> o2.getStr(1));
-        }
+        return ContentParseParse.m.get(ext);
     }
 
 }

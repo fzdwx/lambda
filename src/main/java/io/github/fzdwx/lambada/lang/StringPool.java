@@ -1,5 +1,7 @@
 package io.github.fzdwx.lambada.lang;
 
+import java.io.File;
+
 /**
  * str pool.
  *
@@ -12,6 +14,10 @@ public interface StringPool {
 
     String SLASH = "/";
 
+    String CONCAT = "-";
+
+    String DOUBLE_SLASH = "//";
+
     char SLASH_CHAR = '/';
 
     String WINDOWS_FOLDER_SEPARATOR = "\\";
@@ -21,4 +27,14 @@ public interface StringPool {
     String CURRENT_PATH = ".";
 
     char EXTENSION_SEPARATOR = '.';
+
+    String FILE_SEPARATOR = File.separator;
+
+    char FILE_SEPARATOR_CHAR = File.separatorChar;
+
+    String FILE_PATH_SEPARATOR = File.pathSeparator;
+
+    char FILE_PATH_SEPARATOR_CHAR = File.pathSeparatorChar;
+
+
 }
