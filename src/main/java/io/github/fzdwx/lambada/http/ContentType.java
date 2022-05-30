@@ -238,6 +238,10 @@ public enum ContentType {
         return value + "; charset=" + charset.name();
     }
 
+    public static String addUtf8(String contentType) {
+        return contentType + charset.UTF_8;
+    }
+
     /**
      * 如果 MIME 类型未知，则返回null
      */
