@@ -206,6 +206,7 @@ public interface Seq<T> extends Stream<T> {
      *
      * @apiNote this method is a shortcut for {@code collect(Collectors.toList())},
      * Deprecated in JDK16 and above : {@link #toList()}
+     * todo 后续专门构建JDK的高版本的API
      */
     List<T> toList2();
 
