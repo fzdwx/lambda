@@ -8,7 +8,7 @@ import java.io.File;
  * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/5/17 12:05
  */
-public interface StringPool {
+public interface StrPool {
 
     String EMPTY = "";
 

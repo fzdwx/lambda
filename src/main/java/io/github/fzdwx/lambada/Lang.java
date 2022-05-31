@@ -2,10 +2,9 @@ package io.github.fzdwx.lambada;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.StrFormatter;
-import cn.hutool.core.text.StrPool;
 import io.github.fzdwx.lambada.anno.Nullable;
 import io.github.fzdwx.lambada.internal.LangUtil;
-import io.github.fzdwx.lambada.lang.StringPool;
+import io.github.fzdwx.lambada.lang.StrPool;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -356,7 +355,7 @@ public interface Lang {
      * @since 0.04
      */
     static List<String> split(String text) {
-        final String[] split = StringUtils.split(text, StrPool.COMMA);
+        final String[] split = StringUtils.split(text, cn.hutool.core.text.StrPool.COMMA);
         if (split == null) {
             return new ArrayList<>();
         }
@@ -408,7 +407,7 @@ public interface Lang {
     }
 
     /**
-     * 以 {@link StrPool#COMMA} 为分隔符将多个对象转换为字符串 使用逗号分割
+     * 以 {@link cn.hutool.core.text.StrPool#COMMA} 为分隔符将多个对象转换为字符串 使用逗号分割
      *
      * @param <T>      元素类型
      * @param iterable 集合
@@ -416,7 +415,7 @@ public interface Lang {
      * @since 0.04
      */
     static <T> String join(final Iterable<T> iterable) {
-        return StringUtils.join(iterable, StrPool.COMMA);
+        return StringUtils.join(iterable, cn.hutool.core.text.StrPool.COMMA);
     }
 
     /**
@@ -542,7 +541,7 @@ public interface Lang {
      */
     Charset CHARSET = StandardCharsets.UTF_8;
 
-    String EMPTY_STR = StringPool.EMPTY;
+    String EMPTY_STR = StrPool.EMPTY;
 
     @Nullable
     static <T> T first(Collection<T> collection) {

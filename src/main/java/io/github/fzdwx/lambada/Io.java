@@ -2,7 +2,7 @@ package io.github.fzdwx.lambada;
 
 import io.github.fzdwx.lambada.anno.NonNull;
 import io.github.fzdwx.lambada.anno.Nullable;
-import io.github.fzdwx.lambada.lang.StringPool;
+import io.github.fzdwx.lambada.lang.StrPool;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -72,7 +72,7 @@ public interface Io {
      */
     static String toString(@Nullable InputStream in, @NonNull Charset charset) throws IOException {
         if (in == null) {
-            return StringPool.EMPTY;
+            return StrPool.EMPTY;
         }
         StringBuilder out = new StringBuilder(DEFAULT_SIZE);
         InputStreamReader reader = new InputStreamReader(in, charset);
@@ -195,7 +195,7 @@ public interface Io {
         }
 
         if (fromIndexInclude == toIndexExclude) {
-            return StringPool.EMPTY;
+            return StrPool.EMPTY;
         }
 
         return str.substring(fromIndexInclude, toIndexExclude);
