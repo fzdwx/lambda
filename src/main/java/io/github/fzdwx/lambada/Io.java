@@ -202,13 +202,29 @@ public interface Io {
     }
 
     /**
+     * wrap filePath to {@link File}
+     */
+    @Nullable
+    static File newFile(@Nullable String filePath) {
+        if (Lang.isEmpty(filePath)) {
+            return null;
+        }
+
+        return new File(filePath);
+    }
+
+    /**
      * new randomAccessFile. when File not found, then return null.
      *
      * @param filePath filePath
      * @return {@link RandomAccessFile }
      */
     @Nullable
-    static RandomAccessFile newRaf(String filePath) {
+    static RandomAccessFile newRaf(@Nullable String filePath) {
+        if (Lang.isEmpty(filePath)) {
+            return null;
+        }
+
         try {
             return new RandomAccessFile(filePath, "r");
         } catch (Exception e) {
@@ -216,14 +232,16 @@ public interface Io {
         }
     }
 
-    static File newFile(String filePath) {
-        return new File(filePath);
-    }
-
     /**
-     * file to randomAccessFile. when File not found, then return null.
+     * {@link File} to {@link RandomAccessFile}. when File not found, then return null.
      */
-    static RandomAccessFile toRaf(File file) {
+    @Nullable
+    static RandomAccessFile toRaf(@Nullable File file) {
+        if (file == null) return null;
+        if (file.isDirectory() || !file.exists()) {
+            return null;
+        }
+
         try {
             return new RandomAccessFile(file, "r");
         } catch (Exception e) {
