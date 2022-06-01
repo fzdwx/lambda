@@ -23,9 +23,91 @@ public class Assert {
         return t;
     }
 
-    public static void gt0(final int chunkSize, final String message) {
-        if (chunkSize <= 0) {
+    /**
+     * greater or equal to
+     *
+     * @return {@code actual} greater or equal to {@code expect} will return false,otherwise return true
+     */
+    public static boolean gt(final int actual, final int expect) {
+        return actual <= expect;
+    }
+
+    public static boolean gt0(final int actual) {
+        return gt(actual, 0);
+    }
+
+    public static void gt0(final int actual, final String message) {
+        if (gt0(actual)) {
             Exceptions.illegalArgument(message);
+        }
+    }
+
+    /**
+     * Can be null at the same time, but not one of them
+     *
+     * @return {@code true}: One of them is null.{@code false}: Both are null,or neither is null
+     */
+    public static boolean bothNullOrBothNotNull(Object o1, Object o2) {
+        final boolean o1b = o1 == null;
+        final boolean o2b = o2 == null;
+
+        if (o1b && o2b) {
+            return false;
+        }
+
+        if (o1b) {
+            return true;
+        }
+
+        return o2b;
+    }
+
+    /**
+     * Can be null at the same time, but not one of them
+     *
+     * @param message when o1 or o2 is null throws message.
+     * @throws IllegalArgumentException One of them is null will throw,both are null,or neither is null not throw
+     * @see #bothNullOrBothNotNull(Object, Object)
+     */
+    public static void bothNullOrBothNotNull(Object o1, Object o2, String message) {
+        final boolean o1b = o1 == null;
+        final boolean o2b = o2 == null;
+
+        if (o1b && o2b) {
+            return;
+        }
+
+        if (o1b) {
+            Exceptions.illegalArgument(message);
+        }
+
+        if (o2b) {
+            Exceptions.illegalArgument(message);
+        }
+    }
+
+    /**
+     * Can be null at the same time, but not one of them
+     *
+     * @param o1Message when o1 is null throws message
+     * @param o2Message when o2 is null throws message
+     * @throws IllegalArgumentException One of them is null will throw,both are null,or neither is null not throw
+     * @see #bothNullOrBothNotNull(Object, Object)
+     */
+    public static void bothNullOrBothNotNull(Object o1, Object o2, String o1Message, String o2Message) {
+        final boolean o1b = o1 == null;
+        final boolean o2b = o2 == null;
+
+        if (o1b && o2b) {
+            return;
+        }
+
+        if (o1b) {
+            Exceptions.illegalArgument(o1Message);
+        }
+
+        if (o2b) {
+            Exceptions.illegalArgument(o2Message);
         }
     }
 }
