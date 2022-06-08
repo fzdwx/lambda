@@ -13,7 +13,20 @@ public class MemorySafeLinkedBlockingQueue<E> extends LinkedBlockingQueue<E> {
 
     private static final long serialVersionUID = 8032578371749960142L;
 
+    public static int THE_256_MB = 256 * 1024 * 1024;
+
+    /**
+     * Heap max free memory.
+     * Only available if the heap's free memory is greater than maxFreeMemory
+     */
     private int maxFreeMemory;
+
+    /**
+     * set max free memory is {@link #THE_256_MB}
+     */
+    public MemorySafeLinkedBlockingQueue() {
+        this(THE_256_MB);
+    }
 
     public MemorySafeLinkedBlockingQueue(final int maxFreeMemory) {
         super(Integer.MAX_VALUE);

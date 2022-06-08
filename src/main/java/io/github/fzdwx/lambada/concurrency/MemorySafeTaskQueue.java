@@ -15,6 +15,13 @@ public class MemorySafeTaskQueue<R extends Runnable> extends MemorySafeLinkedBlo
 
     private EagerExecutorService executor;
 
+    /**
+     * set max free memory is {@link #THE_256_MB}
+     */
+    public MemorySafeTaskQueue() {
+        super();
+    }
+
     public MemorySafeTaskQueue(final int maxFreeMemory) {
         super(maxFreeMemory);
     }
