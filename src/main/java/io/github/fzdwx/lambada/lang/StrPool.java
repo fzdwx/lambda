@@ -12,6 +12,8 @@ public interface StrPool {
 
     String EMPTY = "";
 
+    String COLON = ":";
+
     String SLASH = "/";
 
     String CONCAT = "-";

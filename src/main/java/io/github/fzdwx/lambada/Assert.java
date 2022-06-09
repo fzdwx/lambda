@@ -1,5 +1,7 @@
 package io.github.fzdwx.lambada;
 
+import java.util.Collection;
+
 /**
  * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/5/17 16:16
@@ -12,6 +14,26 @@ public class Assert {
 
     public static void nonNull(Object o, String message) {
         if (o == null) {
+            Exceptions.illegalArgument(message);
+        }
+    }
+
+    public static void notEmpty(Collection<?> c) {
+        notEmpty(c, "the collection must not empty");
+    }
+
+    public static void notEmpty(Collection<?> c, String message) {
+        if (c == null || c.isEmpty()) {
+            Exceptions.illegalArgument(message);
+        }
+    }
+
+    public static void notBlank(String val) {
+        notBlank(val, "the val is must not blank");
+    }
+
+    public static void notBlank(String val, String message) {
+        if (Lang.isBlank(val)) {
             Exceptions.illegalArgument(message);
         }
     }
