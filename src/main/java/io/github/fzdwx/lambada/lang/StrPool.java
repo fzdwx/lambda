@@ -38,5 +38,5 @@ public interface StrPool {
 
     char FILE_PATH_SEPARATOR_CHAR = File.pathSeparatorChar;
 
-
+    String SPACE = " ";
 }
