@@ -201,7 +201,20 @@ public interface Seq<T> extends Stream<T> {
     @Override
     Seq<T> skip(final long n);
 
-    List<T> toList();
+    /**
+     * to list
+     *
+     * @apiNote this method is a shortcut for {@code collect(Collectors.toList())},
+     * Deprecated in JDK16 and above : {@link #toList()}
+     * todo 后续专门构建JDK的高版本的API
+     */
+    List<T> toList2();
+
+    /**
+     * to set
+     * @apiNote this method is a shortcut for {@code collect(Collectors.toSet())},
+     */
+    Set<T> toSet2();
 
     @Override
     Seq<T> sequential();
@@ -220,8 +233,6 @@ public interface Seq<T> extends Stream<T> {
     Seq<T> concat(T other);
 
     Seq<T> concat(T... other);
-
-    Set<T> toSet();
 
     default void println() {
         this.forEach(v -> System.out.println(v));

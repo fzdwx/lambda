@@ -99,8 +99,7 @@ public class SeqImpl<T> implements Seq<T> {
     }
 
     @Override
-    public List<T> toList() {
-        // return SharedSecrets.getJavaUtilCollectionAccess().listFromTrustedArrayNullsAllowed(this.toArray());
+    public List<T> toList2() {
         return this.stream.collect(Collectors.toList());
     }
 
@@ -148,7 +147,7 @@ public class SeqImpl<T> implements Seq<T> {
     }
 
     @Override
-    public Set<T> toSet() {
+    public Set<T> toSet2() {
         return this.stream.collect(Collectors.toSet());
     }
 

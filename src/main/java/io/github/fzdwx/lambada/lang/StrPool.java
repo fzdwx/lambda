@@ -8,9 +8,11 @@ import java.io.File;
  * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
  * @date 2022/5/17 12:05
  */
-public interface StringPool {
+public interface StrPool {
 
     String EMPTY = "";
+
+    String COLON = ":";
 
     String SLASH = "/";
 
@@ -36,5 +38,5 @@ public interface StringPool {
 
     char FILE_PATH_SEPARATOR_CHAR = File.pathSeparatorChar;
 
-
+    String SPACE = " ";
 }
