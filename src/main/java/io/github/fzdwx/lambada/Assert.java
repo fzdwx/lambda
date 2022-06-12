@@ -1,6 +1,7 @@
 package io.github.fzdwx.lambada;
 
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * @author <a href="mailto:likelovec@gmail.com">fzdwx</a>
@@ -24,6 +25,16 @@ public class Assert {
 
     public static void notEmpty(Collection<?> c, String message) {
         if (c == null || c.isEmpty()) {
+            Exceptions.illegalArgument(message);
+        }
+    }
+
+    public static void notEmpty(Map<?, ?> map) {
+        notEmpty(map, "the map must not empty");
+    }
+
+    public static void notEmpty(Map<?, ?> map, String message) {
+        if (map == null || map.isEmpty()) {
             Exceptions.illegalArgument(message);
         }
     }
