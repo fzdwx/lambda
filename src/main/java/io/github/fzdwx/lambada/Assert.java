@@ -9,6 +9,26 @@ import java.util.Map;
  */
 public class Assert {
 
+    public static void ifTrue(boolean condition) {
+        ifTrue(condition, "the condition must be false");
+    }
+
+    public static void ifTrue(final boolean condition, final String message) {
+        if (condition) {
+            Exceptions.illegalArgument(message);
+        }
+    }
+
+    public static void ifFalse(boolean condition) {
+        ifTrue(condition, "the condition must be true");
+    }
+
+    public static void ifFalse(final boolean condition, final String message) {
+        if (condition) {
+            Exceptions.illegalArgument(message);
+        }
+    }
+
     public static void nonNull(Object o) {
         nonNull(o, "The validated object is null");
     }
