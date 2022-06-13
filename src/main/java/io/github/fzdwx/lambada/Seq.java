@@ -175,8 +175,23 @@ public interface Seq<T> extends Stream<T> {
         return Tuple.of(trueList, falseList);
     }
 
+    /**
+     * Filter out null data.
+     *
+     * @return {@link Seq }<{@link T }>
+     */
     default Seq<T> nonNull() {
         return filter(Objects::nonNull);
+    }
+
+    /**
+     * This is an intermediate operation.
+     *
+     * @param consumer consumer
+     * @return {@link Seq }<{@link T }>
+     */
+    default Seq<T> and(Consumer<T> consumer) {
+        return peek(consumer);
     }
 
     @Override
