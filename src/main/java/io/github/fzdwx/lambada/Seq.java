@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -174,6 +175,10 @@ public interface Seq<T> extends Stream<T> {
         return Tuple.of(trueList, falseList);
     }
 
+    default Seq<T> nonNull() {
+        return filter(Objects::nonNull);
+    }
+
     @Override
     Seq<T> filter(final Predicate<? super T> predicate);
 
@@ -212,6 +217,7 @@ public interface Seq<T> extends Stream<T> {
 
     /**
      * to set
+     *
      * @apiNote this method is a shortcut for {@code collect(Collectors.toSet())},
      */
     Set<T> toSet2();
