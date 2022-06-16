@@ -9,21 +9,21 @@ import java.util.Map;
  */
 public class Assert {
 
-    public static void ifTrue(boolean condition) {
-        ifTrue(condition, "the condition must be false");
+    public static void reqTrue(boolean condition) {
+        reqTrue(condition, "the condition must be false");
     }
 
-    public static void ifTrue(final boolean condition, final String message) {
-        if (condition) {
+    public static void reqTrue(final boolean condition, final String message) {
+        if (!condition) {
             Exceptions.illegalArgument(message);
         }
     }
 
-    public static void ifFalse(boolean condition) {
-        ifFalse(condition, "the condition must be true");
+    public static void reqFalse(boolean condition) {
+        reqFalse(condition, "the condition must be true");
     }
 
-    public static void ifFalse(final boolean condition, final String message) {
+    public static void reqFalse(final boolean condition, final String message) {
         if (condition) {
             Exceptions.illegalArgument(message);
         }
