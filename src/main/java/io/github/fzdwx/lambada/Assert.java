@@ -20,7 +20,7 @@ public class Assert {
     }
 
     public static void ifFalse(boolean condition) {
-        ifTrue(condition, "the condition must be true");
+        ifFalse(condition, "the condition must be true");
     }
 
     public static void ifFalse(final boolean condition, final String message) {
