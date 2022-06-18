@@ -6,17 +6,8 @@ import io.github.fzdwx.lambada.internal.IntStream;
 import io.github.fzdwx.lambada.internal.SeqImpl;
 import io.github.fzdwx.lambada.internal.Tuple2;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
+import java.util.*;
+import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -156,6 +147,25 @@ public interface Seq<T> extends Stream<T> {
     }
 
     /**
+     * 分组
+     *
+     * @apiNote this method is a shortcut for {@code collect(Collectors.groupingBy(keyMapper))},
+     */
+    default <K> Map<K, List<T>> groupingBy(final Function<? super T, ? extends K> classifier) {
+        return this.collect(Collectors.groupingBy(classifier));
+    }
+
+    /**
+     * 分组
+     *
+     * @apiNote this method is a shortcut for {@code collect(Collectors.groupingBy(classifier, Collectors.mapping(valueMapper, Collectors.toList())))},
+     */
+    default <K, U> Map<K, List<U>> groupingBy(final Function<? super T, ? extends K> classifier,
+                                              final Function<? super T, ? extends U> valueMapper) {
+        return this.collect(Collectors.groupingBy(classifier, Collectors.mapping(valueMapper, Collectors.toList())));
+    }
+
+    /**
      * 收集
      *
      * @param p p
@@ -172,6 +182,25 @@ public interface Seq<T> extends Stream<T> {
         });
 
         return Tuple.of(trueList, falseList);
+    }
+
+    /**
+     * Filter out null data.
+     *
+     * @return {@link Seq }<{@link T }>
+     */
+    default Seq<T> nonNull() {
+        return filter(Objects::nonNull);
+    }
+
+    /**
+     * This is an intermediate operation.
+     *
+     * @param consumer consumer
+     * @return {@link Seq }<{@link T }>
+     */
+    default Seq<T> and(Consumer<T> consumer) {
+        return peek(consumer);
     }
 
     @Override
@@ -212,6 +241,7 @@ public interface Seq<T> extends Stream<T> {
 
     /**
      * to set
+     *
      * @apiNote this method is a shortcut for {@code collect(Collectors.toSet())},
      */
     Set<T> toSet2();
