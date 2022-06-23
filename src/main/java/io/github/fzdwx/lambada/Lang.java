@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * lang.
@@ -39,6 +40,21 @@ public interface Lang {
 
     static <T> T todo(final String msg) {
         throw new RuntimeException(msg);
+    }
+
+    /**
+     * 映射
+     *
+     * @param in     enter
+     * @param mapper 映射器
+     */
+    @Nullable
+    static <I> I mapping(I in, Supplier<I> mapper) {
+        if (in == null) {
+            if (mapper == null) return null;
+            return mapper.get();
+        }
+        return in;
     }
 
     /**
