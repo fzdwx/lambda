@@ -25,9 +25,9 @@ public class StopWatch {
             Exceptions.illegalArgument("taskName is blank");
         }
 
-        final StopWatch stopWatch = new StopWatch(System.currentTimeMillis(), taskName);
-        cache.put(taskName, stopWatch);
-        return stopWatch;
+        return cache.putIfAbsent(taskName,
+                new StopWatch(System.currentTimeMillis(), taskName)
+        );
     }
 
     /**
