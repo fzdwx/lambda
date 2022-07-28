@@ -30,6 +30,14 @@ import java.util.function.Supplier;
 public interface Lang {
 
     /**
+     * default charset
+     *
+     * @since 0.06
+     */
+    Charset CHARSET = StandardCharsets.UTF_8;
+    String EMPTY_STR = StrPool.EMPTY;
+
+    /**
      * 原型设计期间使用的实现的临时替代品
      *
      * @return {@link T}
@@ -43,16 +51,31 @@ public interface Lang {
     }
 
     /**
-     * 映射
+     * 如果{@code in} 为null,则调用{@code defaultValSupplier}并返回.
      *
-     * @param in     enter
-     * @param mapper 映射器
+     * @param in                 enter
+     * @param defaultValSupplier defaultValue supplier
      */
     @Nullable
-    static <I> I mapping(I in, Supplier<I> mapper) {
+    static <I> I mapping(@Nullable I in, @Nullable Supplier<I> defaultValSupplier) {
         if (in == null) {
-            if (mapper == null) return null;
-            return mapper.get();
+            if (defaultValSupplier == null) return null;
+            return defaultValSupplier.get();
+        }
+        return in;
+    }
+
+    /**
+     * 如果{@code in} 为null,则调用{@code defaultValSupplier}并返回.
+     *
+     * @param in                 enter
+     * @param defaultValSupplier defaultValue supplier
+     */
+    @Nullable
+    static String mapping(@Nullable String in, @Nullable Supplier<String> defaultValSupplier) {
+        if (isBlank(in)) {
+            if (defaultValSupplier == null) return null;
+            return defaultValSupplier.get();
         }
         return in;
     }
@@ -67,23 +90,51 @@ public interface Lang {
      */
     @Nullable
     static <I, O> O mapping(I in, Function<I, O> mapper) {
-        return mapping(in, mapper, null);
+        if (in == null || mapper == null) {
+            return null;
+        }
+
+        return mapper.apply(in);
     }
 
     /**
-     * 映射
+     * 将{@code <I>} 转换为 {@code <O>},
+     * 如果{@code in}或{@code mapper}为null,则返回defaultVal.
      *
      * @param in         enter
-     * @param mapper     映射器
+     * @param mapper     mapper
      * @param defaultVal 默认值
      * @return {@link O } output
      */
     @Nullable
     static <I, O> O mapping(@Nullable I in, @Nullable Function<I, O> mapper, @Nullable O defaultVal) {
-        if (in == null || mapper == null) {
+        final O o = mapping(in, mapper);
+
+        if (o == null) {
             return defaultVal;
         }
-        return mapper.apply(in);
+
+        return o;
+    }
+
+    /**
+     * 将{@code <I>} 转换为 {@code <O>},
+     * 如果{@code in}或{@code mapper}为null,则返回defaultVal.
+     *
+     * @param in         enter
+     * @param mapper     mapper
+     * @param defaultValSupplier  defaultValue supplier
+     * @return {@link O } output
+     */
+    @Nullable
+    static <I, O> O mapping(@Nullable I in, @Nullable Function<I, O> mapper, @Nullable Supplier<O> defaultValSupplier) {
+        final O o = mapping(in, mapper);
+
+        if (o == null && defaultValSupplier != null) {
+            return defaultValSupplier.get();
+        }
+
+        return o;
     }
 
     /**
@@ -293,7 +344,6 @@ public interface Lang {
         return !isEmpty(collection);
     }
 
-
     /**
      * 判断map是否为空
      */
@@ -369,7 +419,6 @@ public interface Lang {
         }
         return arr.length;
     }
-
 
     /**
      * get collection size
@@ -579,15 +628,6 @@ public interface Lang {
     static String uncapitalize(String str) {
         return org.springframework.util.StringUtils.uncapitalize(str);
     }
-
-    /**
-     * default charset
-     *
-     * @since 0.06
-     */
-    Charset CHARSET = StandardCharsets.UTF_8;
-
-    String EMPTY_STR = StrPool.EMPTY;
 
     @Nullable
     static <T> T first(Collection<T> collection) {
