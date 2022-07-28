@@ -16,6 +16,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * lang.
@@ -38,6 +40,50 @@ public interface Lang {
 
     static <T> T todo(final String msg) {
         throw new RuntimeException(msg);
+    }
+
+    /**
+     * 映射
+     *
+     * @param in     enter
+     * @param mapper 映射器
+     */
+    @Nullable
+    static <I> I mapping(I in, Supplier<I> mapper) {
+        if (in == null) {
+            if (mapper == null) return null;
+            return mapper.get();
+        }
+        return in;
+    }
+
+    /**
+     * 映射
+     *
+     * @param in     enter
+     * @param mapper 映射器
+     * @return {@link O } output
+     * @apiNote 如果 {@code in} 为 null 则直接返回null
+     */
+    @Nullable
+    static <I, O> O mapping(I in, Function<I, O> mapper) {
+        return mapping(in, mapper, null);
+    }
+
+    /**
+     * 映射
+     *
+     * @param in         enter
+     * @param mapper     映射器
+     * @param defaultVal 默认值
+     * @return {@link O } output
+     */
+    @Nullable
+    static <I, O> O mapping(@Nullable I in, @Nullable Function<I, O> mapper, @Nullable O defaultVal) {
+        if (in == null || mapper == null) {
+            return defaultVal;
+        }
+        return mapper.apply(in);
     }
 
     /**
