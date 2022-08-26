@@ -14,13 +14,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <guava.version>31.1-jre</guava.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
-        <commons-collections.version>3.2.2</commons-collections.version>
+        <commons-collections.version>4.4</commons-collections.version>
 
         <junit.version>5.8.2</junit.version>
         <lombok.version>1.18.22</lombok.version>
         <hutool.version>5.8.2</hutool.version>
         <jline.version>3.21.0</jline.version>
-        <spring-core.version>5.3.20</spring-core.version>
+        <spring-core.version>5.3.22</spring-core.version>
     </properties>
 
     <dependencyManagement>
@@ -46,8 +46,8 @@
                 <version>${jline.version}</version>
             </dependency>
             <dependency>
-                <groupId>commons-collections</groupId>
-                <artifactId>commons-collections</artifactId>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
                 <version>${commons-collections.version}</version>
             </dependency>
             <dependency>
@@ -95,8 +95,8 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
